@@ -95,6 +95,28 @@ public abstract class AbstractDao<T extends AbstractModel> implements Dao<T> {
     }
 
     @Override
+    public void updateById(Long id, T entity) {
+        StringBuilder values = new StringBuilder();
+
+        Field[] fields = clazz.getDeclaredFields();
+
+        for (Field field : fields) {
+            values.append(field.getName())
+                    .append(" = ?, ");
+        }
+
+        String query = String.format("UPDATE %s SET %s WHERE ID = %d;", tableName, values.substring(0, values.length() - 2), id);
+
+        try {
+            PreparedStatement statement = createPrepareStatement(query, entity);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void deleteById(Long id) {
 
         String query = String.format("DELETE FROM %s WHERE ID = ?;", tableName);
@@ -102,16 +124,10 @@ public abstract class AbstractDao<T extends AbstractModel> implements Dao<T> {
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void updateById(Long id) {
-//        UPDATE table_name
-//        SET column1 = value1, column2 = value2, ...
-//        WHERE condition;
     }
 
     private PreparedStatement createPrepareStatement(String query, T entity) throws SQLException {
