@@ -95,13 +95,20 @@ public abstract class AbstractDao<T extends AbstractModel> implements Dao<T> {
     }
 
     @Override
-    public void delete(T t) {
-//        DELETE FROM table_name
-//        WHERE condition;
+    public void deleteById(Long id) {
+
+        String query = String.format("DELETE FROM %s WHERE ID = ?;", tableName);
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setLong(1, id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void update(T t) {
+    public void updateById(Long id) {
 //        UPDATE table_name
 //        SET column1 = value1, column2 = value2, ...
 //        WHERE condition;
