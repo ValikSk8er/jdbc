@@ -3,6 +3,7 @@ package com.valiksk8.dao;
 import com.valiksk8.model.AbstractModel;
 import com.valiksk8.model.TableName;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.sql.Connection;
@@ -70,17 +71,63 @@ public abstract class AbstractDao<T extends AbstractModel> implements Dao<T> {
     }
 
     @Override
-    public void add(T t) {
+    public void add(T entity) {
+
+        StringBuilder fieldsNames = new StringBuilder();
+        StringBuilder values = new StringBuilder();
+        Field[] fields = clazz.getDeclaredFields();
+
+        for (Field field : fields) {
+            fieldsNames.append(field.getName())
+                .append(", ");
+            values.append("?, ");
+        }
+
+        String query = String.format("INSERT INTO %s (%s) VALUES (%s);", tableName, fieldsNames, values);
+
+        try {
+            createPrepareStatement(query, entity)
+            .executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void delete(T t) {
+//        DELETE FROM table_name
+//        WHERE condition;
     }
 
     @Override
     public void update(T t) {
+//        UPDATE table_name
+//        SET column1 = value1, column2 = value2, ...
+//        WHERE condition;
     }
 
+    private PreparedStatement createPrepareStatement(String query, T entity) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(query);
+        Field[] fields = clazz.getDeclaredFields();
+
+        for (int i = 0; i < fields.length; i++) {
+            Field field = fields[i];
+            field.setAccessible(true);
+            Object value = null;
+            try {
+                value = field.get(entity);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            try {
+                statement.setObject(i + 1, value);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return statement;
+    }
 
     private Class<?> getClass(String className) {
         Class<?> someClass = null;

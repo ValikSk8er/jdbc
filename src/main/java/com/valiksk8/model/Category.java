@@ -5,7 +5,6 @@ import java.util.List;
 @TableName("categories")
 public class Category extends AbstractModel{
 
-    private Long id;
     private String name;
     private List<Product> products;
 

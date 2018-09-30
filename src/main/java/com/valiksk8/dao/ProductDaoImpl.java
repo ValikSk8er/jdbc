@@ -17,22 +17,6 @@ public class ProductDaoImpl extends AbstractDao<Product> implements ProuductDao{
         return getProductFromResultSet(resultSet);
     }
 
-    public void add(Product product) {
-
-        String query = "INSERT INTO PRODUCTS (NAME, PRICE, DESCRIPTION) VALUES (?, ?, ?);";
-        PreparedStatement statement;
-
-        try {
-            statement = connection.prepareStatement(query);
-            statement.setString(1, product.getName());
-            statement.setDouble(2, product.getPrice());
-            statement.setString(3, product.getDescription());
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     public Product findByName(String name) {
         String query = "SELECT * FROM Products WHERE NAME = ?";
         PreparedStatement statement;

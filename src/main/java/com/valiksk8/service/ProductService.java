@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ProductService {
 
-    void save(Product product);
+    void add(Product product);
 
     Product findByName(String name);
 

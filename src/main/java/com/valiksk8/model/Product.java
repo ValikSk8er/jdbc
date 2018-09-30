@@ -2,18 +2,11 @@ package com.valiksk8.model;
 
 @TableName("products")
 public class Product extends AbstractModel {
+
     private String name;
     private double price;
     private String description;
-    private Category category;
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
+    private Category fk_categories;
 
     public Product() {
     }
@@ -29,6 +22,14 @@ public class Product extends AbstractModel {
         this.name = name;
         this.price = price;
         this.description = description;
+    }
+
+    public Category getFk_categories() {
+        return fk_categories;
+    }
+
+    public void setFk_categories(Category fk_categories) {
+        this.fk_categories = fk_categories;
     }
 
     public Long getId() {
