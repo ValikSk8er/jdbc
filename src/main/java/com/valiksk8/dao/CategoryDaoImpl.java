@@ -23,7 +23,7 @@ public class CategoryDaoImpl extends AbstractDao<Category> implements CategoryDa
                 "WHERE C.ID = ?";
         PreparedStatement statement;
         ResultSet resultSet;
-        Category result = new Category();
+        Category result = null;
 
         try {
             statement = connection.prepareStatement(query);

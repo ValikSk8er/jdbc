@@ -20,6 +20,11 @@ public class MainServlet extends HttpServlet {
 
     static {
         controllerMap.put(Request.of("GET", "/servlet/categories"), Factory.getAllCategoriesController());
+        controllerMap.put(Request.of("GET", "/servlet/category"), Factory.getGetCategoryByIdController());
+        controllerMap.put(Request.of("GET", "/servlet/login"), r -> ViewModel.of("login"));
+        controllerMap.put(Request.of("POST", "/servlet/login"), Factory.getLoginPageController());
+        controllerMap.put(Request.of("GET", "/servlet/register"), r -> ViewModel.of("register"));
+        controllerMap.put(Request.of("POST", "/servlet/register"), Factory.getRegisterController());
     }
 
     @Override
@@ -43,18 +48,14 @@ public class MainServlet extends HttpServlet {
 
 
     private void process(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException, SQLException {
-        Request request = Request.of(req.getMethod(), req.getRequestURI());
+        Request request = Request.of(req.getMethod(), req.getRequestURI(), req.getParameterMap());
 
         Controller controller = controllerMap.getOrDefault(request, getPageNotFoundController());
 
         ViewModel vm = controller.process(request);
 
         sendResponse(vm, req, resp);
-        //        if(req.getMethod().equals("GET") && req.getRequestURI().equals("/servlet/home")){
-//            req.getRequestDispatcher("/WEB-INF/views/home.jsp").forward(req, resp);
-//        } else {
-//            req.getRequestDispatcher("/WEB-INF/views/404.jsp").forward(req, resp);
-//        }
+
     }
 
     private void sendResponse(ViewModel vm, HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {

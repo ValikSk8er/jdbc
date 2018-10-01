@@ -3,15 +3,15 @@ package com.valiksk8.model;
 @TableName("products")
 public class Product extends AbstractModel {
 
+    private Long id;
     private String name;
     private double price;
     private String description;
     private Category fk_categories;
 
-    public Product() {
-    }
 
     public Product(String name, double price, String description) {
+        this.id = null;
         this.name = name;
         this.price = price;
         this.description = description;

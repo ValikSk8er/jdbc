@@ -4,12 +4,10 @@ import java.util.List;
 
 @TableName("categories")
 public class Category extends AbstractModel{
-
+    private Long id;
     private String name;
     private List<Product> products;
 
-    public Category() {
-    }
 
     public Category(Long id, String name) {
         this.id = id;

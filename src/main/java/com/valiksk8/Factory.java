@@ -1,8 +1,13 @@
 package com.valiksk8;
 
 import com.valiksk8.controller.GetAllCategoriesController;
+import com.valiksk8.controller.GetCategoryByIdController;
+import com.valiksk8.controller.LoginController;
 import com.valiksk8.controller.PageNotFoundController;
+import com.valiksk8.controller.RegisterController;
 import com.valiksk8.dao.CategoryDaoImpl;
+import com.valiksk8.dao.UserDaoImpl;
+import com.valiksk8.service.UserServiceImpl;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -36,5 +41,24 @@ public class Factory {
 
     public static PageNotFoundController getPageNotFoundController() {
         return new PageNotFoundController();
+    }
+
+    public static GetCategoryByIdController getGetCategoryByIdController() {
+        return new GetCategoryByIdController(getCategoryDaoIml(getConnection()));
+    }
+
+    public static LoginController getLoginPageController() {
+        return new LoginController(getUserService());
+    }
+    public static UserServiceImpl getUserService() {
+        return new UserServiceImpl(getUserDao());
+    }
+
+    public static RegisterController getRegisterController() {
+        return new RegisterController(getUserService());
+    }
+
+    public static UserDaoImpl getUserDao() {
+        return new UserDaoImpl(connection);
     }
 }

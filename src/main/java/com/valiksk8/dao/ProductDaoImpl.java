@@ -14,7 +14,11 @@ public class ProductDaoImpl extends AbstractDao<Product> implements ProuductDao{
 
     @Override
     protected Product getObjectFromResultSet(ResultSet resultSet) throws SQLException {
-        return getProductFromResultSet(resultSet);
+        return new Product(
+                resultSet.getLong(1),
+                resultSet.getString(2),
+                resultSet.getDouble(3),
+                resultSet.getString(4));
     }
 
     public Product findByName(String name) {
@@ -34,13 +38,4 @@ public class ProductDaoImpl extends AbstractDao<Product> implements ProuductDao{
         }
         return product;
     }
-
-    private Product getProductFromResultSet (ResultSet resultSet) throws SQLException{
-        return new Product(
-            resultSet.getLong(1),
-            resultSet.getString(2),
-            resultSet.getDouble(3),
-            resultSet.getString(4));
-    }
-
 }
