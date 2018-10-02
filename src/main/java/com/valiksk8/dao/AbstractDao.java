@@ -133,49 +133,6 @@ public abstract class AbstractDao<T extends AbstractModel> implements Dao<T> {
         }
     }
 
-//
-//    protected T getObjectFromResultSet(ResultSet resultSet) throws SQLException {
-//        T entity = null;
-//        try {
-//            if (clazz == null) {
-//                return null;
-//            }
-//            t = (T) clazz.newInstance();
-////            int i = 0;
-//            for (Field field : clazz.getDeclaredFields()) {
-//
-//                String name = field.getName();
-//                field.setAccessible(true);
-//                Object value = resultSet.getObject(name);
-//                Class<?> type = field.getType();
-//                if (isPrimitive(type)) {
-//                    Class<?> boxed = boxPrimitiveClass(type);
-//                    value = boxed.cast(value);
-//                }
-//
-////                Class<?> aClass = getClass(field.getType().getName());
-//                field.set(t, value);
-////
-////                resultSetMethods
-////                        .get(field.getType())
-////                        .invoke(i);
-////                i++;
-////                resultSet.getLong(1)
-//
-//            }
-////            t = (T) clazz.newInstance();
-//
-//
-//        } catch (IllegalAccessException e) {
-//            e.printStackTrace();
-//        } catch (InstantiationException e) {
-//            e.printStackTrace();
-//        } catch (IllegalArgumentException e) {
-//            e.printStackTrace();
-//        }
-//        return t;
-//    }
-
     private PreparedStatement createPrepareStatement(String query, T entity) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(query);
         Field[] fields = clazz.getDeclaredFields();
