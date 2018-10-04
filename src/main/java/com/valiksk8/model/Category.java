@@ -1,10 +1,15 @@
 package com.valiksk8.model;
 
+import com.valiksk8.metadata.ColumnName;
+import com.valiksk8.metadata.TableName;
+
 import java.util.List;
 
 @TableName("categories")
 public class Category extends AbstractModel{
     private Long id;
+
+    @ColumnName("CATEGORY_NAME")
     private String name;
     private List<Product> products;
 

@@ -13,6 +13,20 @@ public class User extends AbstractModel {
         this.id = id;
     }
 
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(Long id, String email, String token, String password, String firstName, String lastName) {
+        this.id = id;
+        this.email = email;
+        this.token = token;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public Long getId() {
         return id;
     }

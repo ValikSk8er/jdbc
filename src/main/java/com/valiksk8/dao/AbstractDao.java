@@ -1,11 +1,10 @@
 package com.valiksk8.dao;
 
+import com.valiksk8.Utils.ClassData;
+import com.valiksk8.metadata.TableName;
 import com.valiksk8.model.AbstractModel;
-import com.valiksk8.model.TableName;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,8 +23,8 @@ public abstract class AbstractDao<T extends AbstractModel> implements Dao<T> {
     public AbstractDao(Connection connection) {
         this.connection = connection;
 
-        String type = getParameterizedTypes(this)[0].getTypeName();
-        clazz = getClass(type);
+        String type = ClassData.getParameterizedTypes(this)[0].getTypeName();
+        clazz = ClassData.getClass(type);
         tableName = clazz.isAnnotationPresent(TableName.class)
                 ? clazz.getAnnotation(TableName.class).value()
                 : null;
@@ -43,6 +42,7 @@ public abstract class AbstractDao<T extends AbstractModel> implements Dao<T> {
         try {
             statement = connection.createStatement();
             resultSet = statement.executeQuery(query);
+            //TO DO: add implementation resultSetMetaData
             ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
 
             while (resultSet.next()) {
@@ -153,23 +153,5 @@ public abstract class AbstractDao<T extends AbstractModel> implements Dao<T> {
             }
         }
         return statement;
-    }
-
-    private Class<?> getClass(String className) {
-        Class<?> someClass = null;
-        try {
-            someClass = Class.forName(className);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return someClass;
-    }
-
-    private static Type[] getParameterizedTypes(Object object) {
-        Type superclassType = object.getClass().getGenericSuperclass();
-        if (!ParameterizedType.class.isAssignableFrom(superclassType.getClass())) {
-            return null;
-        }
-        return ((ParameterizedType) superclassType).getActualTypeArguments();
     }
 }

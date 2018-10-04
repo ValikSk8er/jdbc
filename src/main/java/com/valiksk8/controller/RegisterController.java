@@ -1,10 +1,9 @@
 package com.valiksk8.controller;
 
+import com.valiksk8.model.User;
 import com.valiksk8.service.UserService;
 import com.valiksk8.web.Request;
 import com.valiksk8.web.ViewModel;
-
-import java.sql.SQLException;
 
 public class RegisterController implements Controller {
 
@@ -15,7 +14,12 @@ public class RegisterController implements Controller {
     }
 
     @Override
-    public ViewModel process(Request request) throws SQLException {
-        return null;
+    public ViewModel process(Request request) {
+        String email = request.getParamByName("email");
+        String password = request.getParamByName("password");
+        User user = new User(email, password);
+        ViewModel vm = ViewModel.of("welcome");
+        vm.addAttribute("user", userService.addUser(user));
+        return vm;
     }
 }

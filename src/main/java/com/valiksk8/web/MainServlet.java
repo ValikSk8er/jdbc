@@ -22,8 +22,9 @@ public class MainServlet extends HttpServlet {
         controllerMap.put(Request.of("GET", "/servlet/categories"), Factory.getAllCategoriesController());
         controllerMap.put(Request.of("GET", "/servlet/category"), Factory.getGetCategoryByIdController());
         controllerMap.put(Request.of("GET", "/servlet/login"), r -> ViewModel.of("login"));
-        controllerMap.put(Request.of("POST", "/servlet/login"), Factory.getLoginPageController());
         controllerMap.put(Request.of("GET", "/servlet/register"), r -> ViewModel.of("register"));
+        controllerMap.put(Request.of("GET", "/servlet/home"), r -> ViewModel.of("home"));
+        controllerMap.put(Request.of("POST", "/servlet/login"), Factory.getLoginPageController());
         controllerMap.put(Request.of("POST", "/servlet/register"), Factory.getRegisterController());
     }
 
@@ -45,8 +46,6 @@ public class MainServlet extends HttpServlet {
         }
     }
 
-
-
     private void process(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException, SQLException {
         Request request = Request.of(req.getMethod(), req.getRequestURI(), req.getParameterMap());
 
@@ -61,7 +60,14 @@ public class MainServlet extends HttpServlet {
     private void sendResponse(ViewModel vm, HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
         String redirectUrl = "/WEB-INF/views/%s.jsp";
         vm.getModel().forEach(req:: setAttribute);
+        addCockie(vm, resp);
         req.getRequestDispatcher(String.format(redirectUrl, vm.getView())).forward(req, resp);
 
+    }
+
+    private void addCockie(ViewModel vm, HttpServletResponse response) {
+        if (vm.getCookie() != null) {
+            response.addCookie(vm.getCookie());
+        }
     }
 }

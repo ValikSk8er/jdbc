@@ -1,13 +1,24 @@
 package com.valiksk8.model;
 
+import com.valiksk8.metadata.ColumnName;
+import com.valiksk8.metadata.TableName;
+
 @TableName("products")
 public class Product extends AbstractModel {
 
     private Long id;
+
+    @ColumnName("NAME")
     private String name;
+
+    @ColumnName("PRICE")
     private double price;
+
+    @ColumnName("DESCRIPTION")
     private String description;
-    private Category fk_categories;
+
+    @ColumnName("FK_CATEGORIES")
+    private Category category;
 
 
     public Product(String name, double price, String description) {
@@ -24,12 +35,12 @@ public class Product extends AbstractModel {
         this.description = description;
     }
 
-    public Category getFk_categories() {
-        return fk_categories;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setFk_categories(Category fk_categories) {
-        this.fk_categories = fk_categories;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public Long getId() {

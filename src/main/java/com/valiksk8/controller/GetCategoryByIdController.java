@@ -21,7 +21,7 @@ public class GetCategoryByIdController implements Controller{
     }
 
     private Long getIdFromRequest(Request request) {
-        String iDobject = request.getParams().get("c_id")[0];
+        String iDobject = request.getParamByName("c_id");
         return Long.valueOf(iDobject);
     }
 }

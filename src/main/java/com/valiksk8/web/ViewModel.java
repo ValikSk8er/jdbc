@@ -3,6 +3,7 @@ package com.valiksk8.web;
 import com.valiksk8.Main;
 import com.valiksk8.model.Category;
 
+import javax.servlet.http.Cookie;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ public class ViewModel {
 
     private final String view;
     private final Map<String, Object> model = new HashMap<>();
+    private Cookie cookie;
 
 
     public String getView() {
@@ -32,5 +34,13 @@ public class ViewModel {
         return new ViewModel(view);
     }
 
+
+    public Cookie getCookie() {
+        return cookie;
+    }
+
+    public void setCookie(Cookie cookie) {
+        this.cookie = cookie;
+    }
 
 }

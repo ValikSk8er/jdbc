@@ -1,5 +1,6 @@
 package com.valiksk8.web;
 
+import javax.servlet.http.Cookie;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -10,9 +11,13 @@ public class Request {
     private final String uri;
     private final Map<String, String[]> params;
 
-    public static Request of(String request, String uri) {
+
+
+    public static Request of(String request, String uri)
+    {
         return new Request(request, uri, null);
     }
+
     public static Request of(String request, String uri, Map<String, String[]> params) {
         return new Request(request, uri, params);
     }
@@ -22,7 +27,6 @@ public class Request {
         this.uri = uri;
         this.params = params;
     }
-
     public String getMethod() {
         return method;
     }
@@ -31,8 +35,8 @@ public class Request {
         return uri;
     }
 
-    public Map<String, String[]> getParams() {
-        return params;
+    public String getParamByName(String param) {
+        return params.get(param)[0];
     }
 
     @Override

@@ -66,26 +66,22 @@
     </style>
 </head>
 <body>
-<form class="form-signin" action="<c:url value="/servlet/login"/>" method="post">
+<form class="form-signin" action="<c:url value="/servlet/register"/>" method="post">
 
     <h1 class="h3 mb-3 font-weight-normal">Please register</h1>
 
     <label for="inputEmail" class="sr-only">Email address</label>
 
-    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+    <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
 
     <label for="inputPassword" class="sr-only">Password</label>
 
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
 
-    <label for="inputPassword" class="sr-only">Repeat password</label>
-
-    <input type="password" id="inputPassword" class="form-control" placeholder="Repeat password" required>
-
-<%--<div class="checkbox mb-3">--%>
-    <%--<label>--%>
-    <%--<input type="checkbox" value="remember-me"> Remember me--%>
-    <%--</label>--%>
+    <%--<div class="checkbox mb-3">--%>
+        <%--<label>--%>
+            <%--<input type="checkbox" value="remember-me"> Remember me--%>
+        <%--</label>--%>
     <%--</div>--%>
 
     <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
