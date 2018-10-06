@@ -1,8 +1,5 @@
 package com.valiksk8.web;
 
-import com.valiksk8.Main;
-import com.valiksk8.model.Category;
-
 import javax.servlet.http.Cookie;
 import java.util.HashMap;
 import java.util.Map;

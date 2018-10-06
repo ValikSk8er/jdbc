@@ -68,7 +68,7 @@
 <body>
     <form class="form-signin" action="<c:url value="/servlet/login"/>" method="post">
 
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <h1 class="h3 mb-3 font-weight-normal">Please Login</h1>
 
         <c:if test="${msg}">
             <p style="color:red">Invalid email or password</p>
@@ -87,7 +87,7 @@
             <%--</label>--%>
         <%--</div>--%>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
 
         <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
     </form>

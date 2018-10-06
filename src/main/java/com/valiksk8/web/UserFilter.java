@@ -11,7 +11,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,9 +23,8 @@ public class UserFilter implements Filter {
     private UserDao userDao;
     private static final  String COOKIE_NAME = "MATE";
 
-
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
         userDao = getUserDao();
         protectedUriSet.add("/servlet/categories");
         protectedUriSet.add("/servlet/category");
@@ -40,10 +38,10 @@ public class UserFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         Cookie[] cookies = req.getCookies();
         String token = null;
-        User user = null;
+        User user;
 
         if(!protectedUriSet.contains(req.getRequestURI())) {
-            processAutorized(request, response, chain);
+            processAuthenteticated(request, response, chain);
         }
 
         for(Cookie c : cookies) {
@@ -53,24 +51,24 @@ public class UserFilter implements Filter {
         }
 
         if(token == null) {
-            processUnautorized(request, response);
+            processUnauthenticated(request, response);
 
         } else {
             user = userDao.findByToken(token);
             if (user == null) {
-                processUnautorized(request, response);
+                processUnauthenticated(request, response);
             } else {
                 req.setAttribute("user_id", user.getId());
-                processAutorized(request, response, chain);
+                processAuthenteticated(request, response, chain);
             }
         }
     }
 
-    private void processAutorized(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    private void processAuthenteticated(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         chain.doFilter(request, response);
     }
 
-    private void processUnautorized(ServletRequest request, ServletResponse response) throws ServletException, IOException {
+    private void processUnauthenticated(ServletRequest request, ServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
     }
 

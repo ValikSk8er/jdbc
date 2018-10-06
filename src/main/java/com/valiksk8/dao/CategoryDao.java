@@ -7,7 +7,5 @@ import java.util.List;
 
 public interface CategoryDao {
 
-    Category findById(Long id);
-
-    List<Category> findAll() throws SQLException;
+    List<Category> findAll();
 }
