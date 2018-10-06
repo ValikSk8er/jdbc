@@ -23,7 +23,7 @@ public abstract class AbstractDao<T extends AbstractModel> implements Dao<T> {
     public AbstractDao(Connection connection) {
         this.connection = connection;
 
-        String type = ClassData.getParameterizedTypes(this)[0].getTypeName();
+        String type = ClassData.getParameterizedTypes(this).getTypeName();
         clazz = ClassData.getClass(type);
         tableName = clazz.isAnnotationPresent(TableName.class)
                 ? clazz.getAnnotation(TableName.class).value()

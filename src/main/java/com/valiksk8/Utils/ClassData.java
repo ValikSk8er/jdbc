@@ -16,12 +16,12 @@ public class ClassData {
         return someClass;
     }
 
-    public static Type[] getParameterizedTypes(Object object) {
+    public static Type getParameterizedTypes(Object object) {
         Type superclassType = object.getClass().getGenericSuperclass();
         if (!ParameterizedType.class.isAssignableFrom(superclassType.getClass())) {
             return null;
         }
-        return ((ParameterizedType) superclassType).getActualTypeArguments();
+        return ((ParameterizedType) superclassType).getActualTypeArguments()[0];
     }
 
 
