@@ -1,9 +1,7 @@
 package com.valiksk8.dao;
 
-import com.valiksk8.Utils.ClassData;
-import com.valiksk8.Utils.ClassMetaData;
-import com.valiksk8.Utils.QueryBuilder;
-import com.valiksk8.metadata.ColumnName;
+import com.valiksk8.utils.ClassData;
+import com.valiksk8.utils.QueryBuilder;
 
 import java.lang.reflect.Field;
 import java.sql.Connection;

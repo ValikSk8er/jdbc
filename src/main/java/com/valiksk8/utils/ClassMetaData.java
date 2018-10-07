@@ -1,4 +1,4 @@
-package com.valiksk8.Utils;
+package com.valiksk8.utils;
 
 import com.valiksk8.metadata.ColumnName;
 import com.valiksk8.metadata.TableName;

@@ -1,6 +1,4 @@
-package com.valiksk8.Utils;
-
-import com.valiksk8.dao.AbstractDao;
+package com.valiksk8.utils;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
