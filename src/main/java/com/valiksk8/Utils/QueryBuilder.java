@@ -14,7 +14,7 @@ public class QueryBuilder {
     public static String getSelectByQuery(Class<?> clazz, String byParam) {
         String tableName = ClassMetaData.getTableNameFromClass(clazz);
         String fieldsNames = getFieldsNames(clazz.getDeclaredFields());
-        return String.format("SELECT * FROM %s WHERE %s = ?", tableName, fieldsNames, byParam);
+        return String.format("SELECT %s FROM %s WHERE %s = ?", fieldsNames, tableName, byParam);
     }
 
     public static String getDeleteByQuery(Class<?> clazz, String byParam) {
