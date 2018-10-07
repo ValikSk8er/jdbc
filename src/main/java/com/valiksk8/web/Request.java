@@ -1,7 +1,5 @@
 package com.valiksk8.web;
 
-import javax.servlet.http.Cookie;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -10,7 +8,6 @@ public class Request {
     private final String method;
     private final String uri;
     private final Map<String, String[]> params;
-
 
 
     public static Request of(String request, String uri)

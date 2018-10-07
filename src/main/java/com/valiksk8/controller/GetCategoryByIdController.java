@@ -1,6 +1,5 @@
 package com.valiksk8.controller;
 
-import com.valiksk8.dao.CategoryDao;
 import com.valiksk8.dao.CategoryDaoImpl;
 import com.valiksk8.model.Category;
 import com.valiksk8.web.Request;

@@ -23,7 +23,7 @@ public class LoginController implements Controller {
 
         boolean isVerified = userService.validatePassword(user, password);
 
-        ViewModel vm = null;
+        ViewModel vm;
         if (user != null && isVerified) {
             vm = processAutorised(user);
         } else {

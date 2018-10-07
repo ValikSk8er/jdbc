@@ -3,8 +3,8 @@ package com.valiksk8.model;
 import com.valiksk8.metadata.ColumnName;
 import com.valiksk8.metadata.TableName;
 
-@TableName("products")
-public class Product extends AbstractModel {
+@TableName("PRODUCTS")
+public class Product {
 
     private Long id;
 
@@ -33,6 +33,11 @@ public class Product extends AbstractModel {
         this.name = name;
         this.price = price;
         this.description = description;
+    }
+
+    public Product(String name, double price, String description, Category category) {
+        this(name, price, description);
+        this.category = category;
     }
 
     public Category getCategory() {

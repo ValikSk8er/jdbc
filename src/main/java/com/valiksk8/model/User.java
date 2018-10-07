@@ -1,12 +1,22 @@
 package com.valiksk8.model;
 
-public class User extends AbstractModel {
-    private Long id;
-    private String email;
+import com.valiksk8.metadata.ColumnName;
+import com.valiksk8.metadata.TableName;
 
-    private String token;
+@TableName("USERS")
+public class User {
+
+    @ColumnName("ID")
+    private Long id;
+    @ColumnName("EMAIL")
+    private String email;
+    @ColumnName("PASSWORD")
     private String password;
+    @ColumnName("TOKEN")
+    private String token;
+    @ColumnName("FIRST_NAME")
     private String firstName;
+    @ColumnName("LAST_NAME")
     private String lastName;
 
     public User(Long id) {

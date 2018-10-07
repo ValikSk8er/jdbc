@@ -5,8 +5,10 @@ import com.valiksk8.metadata.TableName;
 
 import java.util.List;
 
-@TableName("categories")
-public class Category extends AbstractModel{
+@TableName("CATEGORIES")
+public class Category {
+
+    @ColumnName("ID")
     private Long id;
 
     @ColumnName("CATEGORY_NAME")

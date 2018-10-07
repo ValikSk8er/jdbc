@@ -2,12 +2,9 @@ package com.valiksk8.controller;
 
 
 import com.valiksk8.dao.ProductDaoImpl;
-import com.valiksk8.dao.ProuductDao;
 import com.valiksk8.model.Product;
 import com.valiksk8.web.Request;
 import com.valiksk8.web.ViewModel;
-
-import java.sql.SQLException;
 
 public class GetProductByIdController implements Controller {
 
@@ -18,7 +15,7 @@ public class GetProductByIdController implements Controller {
     }
 
     @Override
-    public ViewModel process(Request request) throws SQLException {
+    public ViewModel process(Request request) {
         Product product = productDaoImpl.findById(getIdFromRequest(request));
         ViewModel vm = ViewModel.of("product");
         vm.addAttribute("product", product);

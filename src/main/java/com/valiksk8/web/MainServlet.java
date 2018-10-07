@@ -58,7 +58,7 @@ public class MainServlet extends HttpServlet {
 
     }
 
-    private void sendResponse(ViewModel vm, HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
+    private void sendResponse(ViewModel vm, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String redirectUrl = "/WEB-INF/views/%s.jsp";
         vm.getModel().forEach(req:: setAttribute);
         addCockie(vm, resp);

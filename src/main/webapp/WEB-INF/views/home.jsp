@@ -13,5 +13,6 @@
 <body>
     <h1>Home page!!!</h1>
     <h3>Hello ${user.firstName}</h3>
+    <h3>Our: <a href="/servlet/categories">CATEGORIES</a></h3>
 </body>
 </html>

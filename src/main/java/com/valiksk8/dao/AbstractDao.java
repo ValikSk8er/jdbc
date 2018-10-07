@@ -1,8 +1,8 @@
 package com.valiksk8.dao;
 
 import com.valiksk8.Utils.ClassData;
+import com.valiksk8.metadata.ColumnName;
 import com.valiksk8.metadata.TableName;
-import com.valiksk8.model.AbstractModel;
 
 import java.lang.reflect.Field;
 import java.sql.Connection;
@@ -14,7 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractDao<T extends AbstractModel> implements Dao<T> {
+public abstract class AbstractDao<T> implements Dao<T> {
 
     private Class<?> clazz;
     private String tableName;
@@ -43,7 +43,7 @@ public abstract class AbstractDao<T extends AbstractModel> implements Dao<T> {
             statement = connection.createStatement();
             resultSet = statement.executeQuery(query);
             //TO DO: add implementation resultSetMetaData
-            ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+            ResultSetMetaData metaData = resultSet.getMetaData();
 
             while (resultSet.next()) {
                 result.add(getObjectFromResultSet(resultSet));
@@ -65,7 +65,7 @@ public abstract class AbstractDao<T extends AbstractModel> implements Dao<T> {
             statement = connection.prepareStatement(query);
             statement.setLong(1, id);
             resultSet = statement.executeQuery();
-            entity = resultSet.next() ? (T) getObjectFromResultSet(resultSet) : null;
+            entity = resultSet.next() ? getObjectFromResultSet(resultSet) : null;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -81,16 +81,21 @@ public abstract class AbstractDao<T extends AbstractModel> implements Dao<T> {
         Field[] fields = clazz.getDeclaredFields();
 
         for (Field field : fields) {
-            fieldsNames.append(field.getName())
-                .append(", ");
-            values.append("?, ");
+            String columnName = field.isAnnotationPresent(ColumnName.class)
+                    ? field.getAnnotation(ColumnName.class).value()
+                    : null;
+            if (columnName != null) {
+                fieldsNames.append(columnName)
+                        .append(", ");
+                values.append("?, ");
+            }
         }
 
         String query = String.format("INSERT INTO %s (%s) VALUES (%s);", tableName, fieldsNames, values);
 
         try {
-            createPrepareStatement(query, entity)
-            .executeUpdate();
+            createPrepareStatement(query, entity);
+//            .executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
