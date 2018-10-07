@@ -2,7 +2,7 @@ package com.valiksk8.utils;
 
 import java.lang.reflect.Field;
 
-public class QueryBuilder {
+public class QueryFactory {
     private static final String separator = ", ";
 
     public static String getSelectAllQuery(Class<?> clazz) {
@@ -11,13 +11,13 @@ public class QueryBuilder {
         return String.format("SELECT %s FROM %s", fieldsNames, tableName);
     }
 
-    public static String getSelectByQuery(Class<?> clazz, String byParam) {
+    public static String getSelectByParamQuery(Class<?> clazz, String byParam) {
         String tableName = ClassMetaData.getTableNameFromClass(clazz);
         String fieldsNames = getFieldsNames(clazz.getDeclaredFields());
         return String.format("SELECT %s FROM %s WHERE %s = ?", fieldsNames, tableName, byParam);
     }
 
-    public static String getDeleteByQuery(Class<?> clazz, String byParam) {
+    public static String getDeleteByParamQuery(Class<?> clazz, String byParam) {
         String tableName = ClassMetaData.getTableNameFromClass(clazz);
         return String.format("DELETE FROM %s WHERE %s = ?;", tableName, byParam);
     }
