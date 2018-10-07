@@ -6,6 +6,7 @@ import com.valiksk8.metadata.TableName;
 @TableName("PRODUCTS")
 public class Product {
 
+    @ColumnName("ID")
     private Long id;
 
     @ColumnName("NAME")
@@ -18,30 +19,33 @@ public class Product {
     private String description;
 
     @ColumnName("FK_CATEGORIES")
+    private Long category_id;
     private Category category;
 
 
     public Product(String name, double price, String description) {
-        this.id = null;
         this.name = name;
         this.price = price;
         this.description = description;
     }
 
     public Product(Long id, String name, double price, String description) {
+        this(name, price, description);
         this.id = id;
-        this.name = name;
-        this.price = price;
-        this.description = description;
     }
 
     public Product(String name, double price, String description, Category category) {
         this(name, price, description);
         this.category = category;
+        this.category_id = category.getId();
     }
 
     public Category getCategory() {
         return category;
+    }
+
+    public Long getCategory_id() {
+        return category_id;
     }
 
     public void setCategory(Category category) {

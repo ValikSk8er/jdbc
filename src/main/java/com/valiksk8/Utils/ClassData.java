@@ -1,19 +1,21 @@
 package com.valiksk8.Utils;
 
+import com.valiksk8.dao.AbstractDao;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 public class ClassData {
 
 
-    public static Class<?> getClass(String className) {
-        Class<?> someClass = null;
+    public static Class<?> getClassFromType(String className) {
+        Class<?> clazz = null;
         try {
-            someClass = Class.forName(className);
+            clazz = Class.forName(className);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return someClass;
+        return clazz;
     }
 
     public static Type getParameterizedTypes(Object object) {
@@ -25,4 +27,8 @@ public class ClassData {
     }
 
 
+    public static Class<?> getClassFromGeneric(Object object) {
+        String type = ClassData.getParameterizedTypes(object).getTypeName();
+        return getClassFromType(type);
+    }
 }

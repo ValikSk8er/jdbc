@@ -13,6 +13,7 @@ public class Category {
 
     @ColumnName("CATEGORY_NAME")
     private String name;
+
     private List<Product> products;
 
 

@@ -1,8 +1,9 @@
 package com.valiksk8.dao;
 
 import com.valiksk8.Utils.ClassData;
+import com.valiksk8.Utils.ClassMetaData;
+import com.valiksk8.Utils.QueryBuilder;
 import com.valiksk8.metadata.ColumnName;
-import com.valiksk8.metadata.TableName;
 
 import java.lang.reflect.Field;
 import java.sql.Connection;
@@ -17,24 +18,18 @@ import java.util.List;
 public abstract class AbstractDao<T> implements Dao<T> {
 
     private Class<?> clazz;
-    private String tableName;
     final Connection connection;
 
     public AbstractDao(Connection connection) {
         this.connection = connection;
-
-        String type = ClassData.getParameterizedTypes(this).getTypeName();
-        clazz = ClassData.getClass(type);
-        tableName = clazz.isAnnotationPresent(TableName.class)
-                ? clazz.getAnnotation(TableName.class).value()
-                : null;
+        clazz = ClassData.getClassFromGeneric(this);
     }
 
     protected abstract T getObjectFromResultSet(ResultSet resultSet) throws SQLException;
 
     @Override
     public List<T> findAll() {
-        String query = String.format("SELECT * FROM %s", tableName.toUpperCase());
+        String query = QueryBuilder.getSelectAllQuery(this.clazz);
         List<T> result = new ArrayList<>();
         Statement statement;
         ResultSet resultSet;
@@ -56,7 +51,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 
     @Override
     public T findById(Long id) {
-        String query = String.format("SELECT * FROM %s WHERE ID = ?", tableName.toUpperCase());
+        String query = QueryBuilder.getSelectByQuery(this.clazz, "ID");
         PreparedStatement statement;
         ResultSet resultSet;
         T entity = null;
@@ -75,27 +70,10 @@ public abstract class AbstractDao<T> implements Dao<T> {
 
     @Override
     public void add(T entity) {
-
-        StringBuilder fieldsNames = new StringBuilder();
-        StringBuilder values = new StringBuilder();
-        Field[] fields = clazz.getDeclaredFields();
-
-        for (Field field : fields) {
-            String columnName = field.isAnnotationPresent(ColumnName.class)
-                    ? field.getAnnotation(ColumnName.class).value()
-                    : null;
-            if (columnName != null) {
-                fieldsNames.append(columnName)
-                        .append(", ");
-                values.append("?, ");
-            }
-        }
-
-        String query = String.format("INSERT INTO %s (%s) VALUES (%s);", tableName, fieldsNames, values);
-
+        String query = QueryBuilder.getInsertQuery(clazz);
         try {
-            createPrepareStatement(query, entity);
-//            .executeUpdate();
+            createPrepareStatement(query, entity)
+                .executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -104,17 +82,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 
     @Override
     public void updateById(Long id, T entity) {
-        StringBuilder values = new StringBuilder();
-
-        Field[] fields = clazz.getDeclaredFields();
-
-        for (Field field : fields) {
-            values.append(field.getName())
-                    .append(" = ?, ");
-        }
-
-        String query = String.format("UPDATE %s SET %s WHERE ID = %d;", tableName, values.substring(0, values.length() - 2), id);
-
+        String query = QueryBuilder.getUpdateByIdQuery(clazz, id);
         try {
             PreparedStatement statement = createPrepareStatement(query, entity);
             statement.executeUpdate();
@@ -126,8 +94,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 
     @Override
     public void deleteById(Long id) {
-
-        String query = String.format("DELETE FROM %s WHERE ID = ?;", tableName);
+        String query = QueryBuilder.getDeleteByQuery(this.clazz, "ID");
 
         try {
             PreparedStatement statement = connection.prepareStatement(query);
@@ -141,7 +108,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
     private PreparedStatement createPrepareStatement(String query, T entity) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(query);
         Field[] fields = clazz.getDeclaredFields();
-
+        int paramIndex = 1;
         for (int i = 0; i < fields.length; i++) {
             Field field = fields[i];
             field.setAccessible(true);
@@ -152,7 +119,9 @@ public abstract class AbstractDao<T> implements Dao<T> {
                 e.printStackTrace();
             }
             try {
-                statement.setObject(i + 1, value);
+                if(value != null){
+                    statement.setObject(paramIndex++, value);
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
