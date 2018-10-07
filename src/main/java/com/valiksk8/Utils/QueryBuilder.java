@@ -25,7 +25,7 @@ public class QueryBuilder {
     public static String getInsertQuery(Class<?> clazz) {
         String tableName = ClassMetaData.getTableNameFromClass(clazz);
         String fieldsNames = getFieldsNamesWithoutId(clazz.getDeclaredFields());
-        int fieldsNumber = fieldsNames.split(",").length;
+        int fieldsNumber = fieldsNames.split(separator).length;
         String queryValueSign = "?";
         String values = getValuesWithSigns(fieldsNumber, queryValueSign);
 
