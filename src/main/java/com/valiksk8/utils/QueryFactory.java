@@ -3,7 +3,7 @@ package com.valiksk8.utils;
 import java.lang.reflect.Field;
 
 public class QueryFactory {
-    private static final String separator = ", ";
+    private static final String SEPARATOR = ", ";
 
     public static String getSelectAllQuery(Class<?> clazz) {
         String tableName = ClassMetaData.getTableNameFromClass(clazz);
@@ -25,7 +25,7 @@ public class QueryFactory {
     public static String getInsertQuery(Class<?> clazz) {
         String tableName = ClassMetaData.getTableNameFromClass(clazz);
         String fieldsNames = getFieldsNamesWithoutId(clazz.getDeclaredFields());
-        int fieldsNumber = fieldsNames.split(separator).length;
+        int fieldsNumber = fieldsNames.split(SEPARATOR).length;
         String queryValueSign = "?";
         String values = getValuesWithSigns(fieldsNumber, queryValueSign);
 
@@ -42,10 +42,10 @@ public class QueryFactory {
         for (Field field : fields) {
             values.append(field.getName())
                     .append(queryValueSign)
-                    .append(separator);
+                    .append(SEPARATOR);
         }
 
-        values.substring(0, values.length() - separator.length());
+        values.substring(0, values.length() - SEPARATOR.length());
         return String.format("UPDATE %s SET %s WHERE ID = %d;", tableName, values, id);
     }
 
@@ -55,10 +55,10 @@ public class QueryFactory {
             String columnName = ClassMetaData.getColumnNameFromField(field);
             if (columnName != null) {
                 fieldsNames.append(columnName)
-                        .append(separator);
+                        .append(SEPARATOR);
             }
         }
-        return fieldsNames.substring(0, fieldsNames.length() - separator.length());
+        return fieldsNames.substring(0, fieldsNames.length() - SEPARATOR.length());
     }
 
     private static String getFieldsNamesWithoutId(Field[] fields) {
@@ -68,19 +68,19 @@ public class QueryFactory {
             String columnName = ClassMetaData.getColumnNameFromField(field);
             if (columnName != null && !columnName.equals("ID")) {
                 fieldsNames.append(columnName)
-                        .append(separator);
+                        .append(SEPARATOR);
             }
         }
 
-        return fieldsNames.substring(0, fieldsNames.length() - separator.length());
+        return fieldsNames.substring(0, fieldsNames.length() - SEPARATOR.length());
     }
 
     private static String getValuesWithSigns(int signCount, String valueSign) {
         StringBuilder values = new StringBuilder();
         for (int i = 0; i < signCount; i++) {
             values.append(valueSign)
-                    .append(separator);
+                    .append(SEPARATOR);
         }
-        return values.substring(0, values.length() - separator.length());
+        return values.substring(0, values.length() - SEPARATOR.length());
     }
 }
