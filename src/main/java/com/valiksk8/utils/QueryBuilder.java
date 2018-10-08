@@ -2,7 +2,7 @@ package com.valiksk8.utils;
 
 import java.lang.reflect.Field;
 
-public class QueryFactory {
+public class QueryBuilder {
     private static final String SEPARATOR = ", ";
 
     public static String getSelectAllQuery(Class<?> clazz) {

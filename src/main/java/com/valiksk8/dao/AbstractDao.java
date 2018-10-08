@@ -1,7 +1,7 @@
 package com.valiksk8.dao;
 
 import com.valiksk8.utils.ClassData;
-import com.valiksk8.utils.QueryFactory;
+import com.valiksk8.utils.QueryBuilder;
 
 import java.lang.reflect.Field;
 import java.sql.Connection;
@@ -27,7 +27,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 
     @Override
     public List<T> findAll() {
-        String query = QueryFactory.getSelectAllQuery(this.clazz);
+        String query = QueryBuilder.getSelectAllQuery(this.clazz);
         List<T> result = new ArrayList<>();
         Statement statement;
         ResultSet resultSet;
@@ -49,7 +49,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 
     @Override
     public T findById(Long id) {
-        String query = QueryFactory.getSelectByParamQuery(this.clazz, "ID");
+        String query = QueryBuilder.getSelectByParamQuery(this.clazz, "ID");
         PreparedStatement statement;
         ResultSet resultSet;
         T entity = null;
@@ -68,7 +68,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 
     @Override
     public void add(T entity) {
-        String query = QueryFactory.getInsertQuery(clazz);
+        String query = QueryBuilder.getInsertQuery(clazz);
         try {
             createPrepareStatement(query, entity)
                 .executeUpdate();
@@ -80,7 +80,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 
     @Override
     public void updateById(Long id, T entity) {
-        String query = QueryFactory.getUpdateByIdQuery(clazz, id);
+        String query = QueryBuilder.getUpdateByIdQuery(clazz, id);
         try {
             PreparedStatement statement = createPrepareStatement(query, entity);
             statement.executeUpdate();
@@ -92,7 +92,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 
     @Override
     public void deleteById(Long id) {
-        String query = QueryFactory.getDeleteByParamQuery(this.clazz, "ID");
+        String query = QueryBuilder.getDeleteByParamQuery(this.clazz, "ID");
 
         try {
             PreparedStatement statement = connection.prepareStatement(query);
