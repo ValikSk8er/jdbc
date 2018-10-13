@@ -36,13 +36,13 @@ public class CategoryDaoImpl extends AbstractDao<Category> implements CategoryDa
 
         return result;
     }
-
-    @Override
-    protected Category getObjectFromResultSet(ResultSet resultSet) throws SQLException {
-        return new Category(
-                resultSet.getLong(1),
-                resultSet.getString(2));
-    }
+//
+//    @Override
+//    protected Category getObjectFromResultSet(ResultSet resultSet) throws SQLException {
+//        return new Category(
+//                resultSet.getLong(1),
+//                resultSet.getString(2));
+//    }
 
     private Category getObjectFromResultSetWithProduct(ResultSet resultSet) throws SQLException {
         List<Product> products = new ArrayList<>();

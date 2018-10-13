@@ -66,7 +66,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     @Override
     public User findByToken(String token) {
-        String query = "SELECT U.ID, U.EMAIL, U.TOKEN, U.PASSWORD, U.FIRST_NAME, U.LAST_NAME, R.NAME " +
+        String query = "SELECT U.ID, U.EMAIL, U.PASSWORD, U.TOKEN, U.FIRST_NAME, U.LAST_NAME, R.NAME " +
                 "FROM USERS U " +
                 "JOIN USER_TO_ROLE UTR ON U.ID = UTR.FK_USER_ID " +
                 "JOIN ROLE R ON UTR.FK_ROLE_ID = R.NAME " +
@@ -104,8 +104,6 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     @Override
     public User findByEmail(String email) {
-
-//        String query = "SELECT ID, EMAIL, TOKEN, PASSWORD, FIRST_NAME, LAST_NAME FROM USERS WHERE EMAIL = ?";
         String query = QueryBuilder.getSelectByParamQuery(User.class,"EMAIL");
         PreparedStatement statement;
         ResultSet resultSet;
@@ -122,15 +120,15 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
         return user;
     }
-
-    @Override
-    protected User getObjectFromResultSet(ResultSet resultSet) throws SQLException {
-        return new User(
-                resultSet.getLong(1),
-                resultSet.getString(2),
-                resultSet.getString(3),
-                resultSet.getString(4),
-                resultSet.getString(5),
-                resultSet.getString(6));
-    }
+//
+//    @Override
+//    protected User getObjectFromResultSet(ResultSet resultSet) throws SQLException {
+//        return new User(
+//                resultSet.getLong(1),
+//                resultSet.getString(2),
+//                resultSet.getString(3),
+//                resultSet.getString(4),
+//                resultSet.getString(5),
+//                resultSet.getString(6));
+//    }
 }

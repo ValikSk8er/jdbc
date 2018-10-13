@@ -31,7 +31,6 @@ public class ViewModel {
         return new ViewModel(view);
     }
 
-
     public Cookie getCookie() {
         return cookie;
     }

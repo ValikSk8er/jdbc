@@ -23,6 +23,9 @@ public class User {
     private String lastName;
     private Set<Role> roles = new HashSet<>();
 
+    public User() {
+    }
+
     public User(Long id) {
         this.id = id;
     }

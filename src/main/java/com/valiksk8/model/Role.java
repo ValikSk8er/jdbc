@@ -1,9 +1,17 @@
 package com.valiksk8.model;
 
+import com.valiksk8.metadata.ColumnName;
+import com.valiksk8.metadata.TableName;
+
+@TableName("ROLE")
 public class Role {
 
+    @ColumnName("Name")
     private RoleName roleName;
     private User user;
+
+    public Role() {
+    }
 
     public Role(RoleName roleName) {
         this.roleName = roleName;

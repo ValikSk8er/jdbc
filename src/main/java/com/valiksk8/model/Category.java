@@ -16,6 +16,9 @@ public class Category {
 
     private List<Product> products;
 
+    public Category() {
+
+    }
 
     public Category(Long id, String name) {
         this.id = id;

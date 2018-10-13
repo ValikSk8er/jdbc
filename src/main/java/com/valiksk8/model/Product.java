@@ -22,6 +22,8 @@ public class Product {
     private Long category_id;
     private Category category;
 
+    public Product() {
+    }
 
     public Product(String name, double price, String description) {
         this.name = name;
