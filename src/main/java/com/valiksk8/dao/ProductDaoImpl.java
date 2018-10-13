@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ProductDaoImpl extends AbstractDao<Product> implements ProuductDao{
+public class ProductDaoImpl extends AbstractDao<Product> implements ProductDao {
     public ProductDaoImpl(Connection connection) {
         super(connection);
     }

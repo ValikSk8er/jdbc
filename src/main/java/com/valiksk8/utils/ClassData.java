@@ -26,7 +26,7 @@ public class ClassData {
 
 
     public static Class<?> getClassFromGeneric(Object object) {
-        String type = ClassData.getParameterizedTypes(object).getTypeName();
+        String type = getParameterizedTypes(object).getTypeName();
         return getClassFromType(type);
     }
 }

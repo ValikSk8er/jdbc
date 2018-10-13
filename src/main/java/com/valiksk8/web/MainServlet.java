@@ -24,9 +24,11 @@ public class MainServlet extends HttpServlet {
         controllerMap.put(Request.of("GET", "/servlet/login"), r -> ViewModel.of("login"));
         controllerMap.put(Request.of("GET", "/servlet/register"), r -> ViewModel.of("register"));
         controllerMap.put(Request.of("GET", "/servlet/home"), r -> ViewModel.of("home"));
+        controllerMap.put(Request.of("GET", "/servlet/admin"), r -> ViewModel.of("adminPage"));
         controllerMap.put(Request.of("POST", "/servlet/login"), Factory.getLoginPageController());
         controllerMap.put(Request.of("POST", "/servlet/register"), Factory.getRegisterController());
         controllerMap.put(Request.of("GET", "/servlet/product"), Factory.getGetProductByIdController());
+        controllerMap.put(Request.of("GET", "/servlet/logout"), Factory.getLogoutController());
     }
 
     @Override
@@ -47,8 +49,10 @@ public class MainServlet extends HttpServlet {
         }
     }
 
+
+
     private void process(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException, SQLException {
-        Request request = Request.of(req.getMethod(), req.getRequestURI(), req.getParameterMap());
+        Request request = Request.of(req.getMethod(), req.getRequestURI(), req.getParameterMap(), req.getCookies());
 
         Controller controller = controllerMap.getOrDefault(request, getPageNotFoundController());
 
@@ -60,7 +64,8 @@ public class MainServlet extends HttpServlet {
 
     private void sendResponse(ViewModel vm, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String redirectUrl = "/WEB-INF/views/%s.jsp";
-        vm.getModel().forEach(req:: setAttribute);
+//        vm.getModel().forEach(req:: setAttribute);
+        vm.getModel().forEach((k, v) -> req.setAttribute(k, v));
         addCockie(vm, resp);
         req.getRequestDispatcher(String.format(redirectUrl, vm.getView())).forward(req, resp);
 

@@ -20,14 +20,14 @@ public abstract class AbstractDao<T> implements Dao<T> {
 
     public AbstractDao(Connection connection) {
         this.connection = connection;
-        clazz = ClassData.getClassFromGeneric(this);
+        this.clazz = ClassData.getClassFromGeneric(this);
     }
 
     protected abstract T getObjectFromResultSet(ResultSet resultSet) throws SQLException;
 
     @Override
     public List<T> findAll() {
-        String query = QueryBuilder.getSelectAllQuery(this.clazz);
+        String query = QueryBuilder.getSelectAllQuery(clazz);
         List<T> result = new ArrayList<>();
         Statement statement;
         ResultSet resultSet;
@@ -49,7 +49,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 
     @Override
     public T findById(Long id) {
-        String query = QueryBuilder.getSelectByParamQuery(this.clazz, "ID");
+        String query = QueryBuilder.getSelectByParamQuery(clazz, "ID");
         PreparedStatement statement;
         ResultSet resultSet;
         T entity = null;
@@ -92,7 +92,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 
     @Override
     public void deleteById(Long id) {
-        String query = QueryBuilder.getDeleteByParamQuery(this.clazz, "ID");
+        String query = QueryBuilder.getDeleteByParamQuery(clazz, "ID");
 
         try {
             PreparedStatement statement = connection.prepareStatement(query);

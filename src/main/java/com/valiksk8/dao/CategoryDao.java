@@ -5,7 +5,7 @@ import com.valiksk8.model.Category;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface CategoryDao {
+public interface CategoryDao extends Dao<Category>{
 
     List<Category> findAll();
 }

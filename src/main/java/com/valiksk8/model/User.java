@@ -3,6 +3,9 @@ package com.valiksk8.model;
 import com.valiksk8.metadata.ColumnName;
 import com.valiksk8.metadata.TableName;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @TableName("USERS")
 public class User {
 
@@ -18,6 +21,7 @@ public class User {
     private String firstName;
     @ColumnName("LAST_NAME")
     private String lastName;
+    private Set<Role> roles = new HashSet<>();
 
     public User(Long id) {
         this.id = id;
@@ -28,7 +32,7 @@ public class User {
         this.password = password;
     }
 
-    public User(Long id, String email, String token, String password, String firstName, String lastName) {
+    public User(Long id, String email, String password, String token, String firstName, String lastName) {
         this.id = id;
         this.email = email;
         this.token = token;
@@ -85,6 +89,15 @@ public class User {
         this.lastName = lastName;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
 
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 
+    public void addRole(Role role) {
+        this.roles.add(role);
+    }
 }

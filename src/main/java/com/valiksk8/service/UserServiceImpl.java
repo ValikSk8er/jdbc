@@ -1,12 +1,15 @@
 package com.valiksk8.service;
 
 import com.valiksk8.dao.UserDao;
+import com.valiksk8.model.Role;
 import com.valiksk8.model.User;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
+
+import static com.valiksk8.model.Role.RoleName.USER;
 
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
@@ -20,8 +23,10 @@ public class UserServiceImpl implements UserService {
         String hashedPassword = hashPassword(user.getPassword());
         user.setPassword(hashedPassword);
         user.setToken(getToken());
+        user.addRole(getDefaultRole());
         return userDao.addUser(user);
     }
+
 
     @Override
     public User findByEmail(String email) {
@@ -63,5 +68,9 @@ public class UserServiceImpl implements UserService {
             hexString.append(hex);
         }
         return hexString.toString();
+    }
+
+    private Role getDefaultRole() {
+        return Role.of(USER.toString());
     }
 }

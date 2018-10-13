@@ -5,11 +5,11 @@ import com.valiksk8.controller.GetAllCategoriesController;
 import com.valiksk8.controller.GetCategoryByIdController;
 import com.valiksk8.controller.GetProductByIdController;
 import com.valiksk8.controller.LoginController;
+import com.valiksk8.controller.LogoutController;
 import com.valiksk8.controller.PageNotFoundController;
 import com.valiksk8.controller.RegisterController;
 import com.valiksk8.dao.CategoryDaoImpl;
 import com.valiksk8.dao.ProductDaoImpl;
-import com.valiksk8.dao.ProuductDao;
 import com.valiksk8.dao.UserDaoImpl;
 import com.valiksk8.service.UserServiceImpl;
 
@@ -72,5 +72,9 @@ public class Factory {
 
     public static GetProductByIdController getGetProductByIdController() {
         return new GetProductByIdController(getProductDaoImpl(connection));
+    }
+
+    public static Controller getLogoutController() {
+        return new LogoutController();
     }
 }

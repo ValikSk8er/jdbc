@@ -6,11 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Product ${product.id}</title>
-</head>
-<body>
+<%@include file="header.jsp" %>
     <h3>Product id: ${product.id}</h3>
     <h3>Product name: ${product.name}</h3>
     <h3>Product price: ${product.price}</h3>
