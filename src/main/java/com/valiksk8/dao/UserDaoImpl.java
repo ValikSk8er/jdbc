@@ -78,7 +78,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
             statement = connection.prepareStatement(query);
             statement.setString(1, token);
             resultSet = statement.executeQuery();
-            user = resultSet.next() ? getUserWIthRoles(resultSet) : null;
+            user = resultSet.next() ? getUserWIthRolesFromResultSet(resultSet) : null;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -86,14 +86,8 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
         return user;
     }
 
-    private User getUserWIthRoles(ResultSet resultSet) throws SQLException {
-        User user = new User(
-                resultSet.getLong(1),
-                resultSet.getString(2),
-                resultSet.getString(3),
-                resultSet.getString(4),
-                resultSet.getString(5),
-                resultSet.getString(6));
+    private User getUserWIthRolesFromResultSet(ResultSet resultSet) throws SQLException {
+        User user = getObjectFromResultSet(resultSet);
         while (!resultSet.isAfterLast()){
             Role role = Role.of(resultSet.getString(7));
             user.addRole(role);
@@ -105,30 +99,6 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     @Override
     public User findByEmail(String email) {
         String query = QueryBuilder.getSelectByParamQuery(User.class,"EMAIL");
-        PreparedStatement statement;
-        ResultSet resultSet;
-        User user = null;
-
-        try {
-            statement = connection.prepareStatement(query);
-            statement.setString(1, email);
-            resultSet = statement.executeQuery();
-            user = resultSet.next() ? getObjectFromResultSet(resultSet) : null;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return user;
+        return simpleConnectAndGetObjectByParam(query, email);
     }
-//
-//    @Override
-//    protected User getObjectFromResultSet(ResultSet resultSet) throws SQLException {
-//        return new User(
-//                resultSet.getLong(1),
-//                resultSet.getString(2),
-//                resultSet.getString(3),
-//                resultSet.getString(4),
-//                resultSet.getString(5),
-//                resultSet.getString(6));
-//    }
 }
