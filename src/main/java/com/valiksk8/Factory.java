@@ -1,6 +1,8 @@
 package com.valiksk8;
 
 import com.valiksk8.controller.Controller;
+import com.valiksk8.controller.GetAdminAddCategoryContorller;
+import com.valiksk8.controller.GetAdminDeleteCategoryContorller;
 import com.valiksk8.controller.GetAllCategoriesController;
 import com.valiksk8.controller.GetCategoryByIdController;
 import com.valiksk8.controller.GetProductByIdController;
@@ -76,5 +78,13 @@ public class Factory {
 
     public static Controller getLogoutController() {
         return new LogoutController();
+    }
+
+    public static Controller getGetAdminAddCategoryContorller() {
+        return new GetAdminAddCategoryContorller(getCategoryDaoIml(connection));
+    }
+
+    public static Controller getGetAdminDeleteCategoryContorller() {
+        return new GetAdminDeleteCategoryContorller(getCategoryDaoIml(connection));
     }
 }

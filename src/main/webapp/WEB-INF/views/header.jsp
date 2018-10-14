@@ -8,7 +8,7 @@
 --%>
 <html>
 <head>
-    <title>Mate</title>
+    <title>${pageContext.request.contextPath}</title>
 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           rel="stylesheet"
@@ -131,7 +131,7 @@
                 <a class="nav-link" href="${pageContext.request.contextPath}/servlet/categories">Categories</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" href="${pageContext.request.contextPath}/servlet/adminPage">Admin Page</a>
+                <a class="nav-link disabled" href="${pageContext.request.contextPath}/servlet/admin">Admin Page</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>

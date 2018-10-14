@@ -25,10 +25,17 @@ public class MainServlet extends HttpServlet {
         controllerMap.put(Request.of("GET", "/servlet/register"), r -> ViewModel.of("register"));
         controllerMap.put(Request.of("GET", "/servlet/home"), r -> ViewModel.of("home"));
         controllerMap.put(Request.of("GET", "/servlet/admin"), r -> ViewModel.of("adminPage"));
-        controllerMap.put(Request.of("POST", "/servlet/login"), Factory.getLoginPageController());
-        controllerMap.put(Request.of("POST", "/servlet/register"), Factory.getRegisterController());
+        controllerMap.put(Request.of("GET", "/servlet/adminCategories"), r -> ViewModel.of("adminCategories"));
+        controllerMap.put(Request.of("GET", "/servlet/adminProducts"), r -> ViewModel.of("adminProducts"));
+        controllerMap.put(Request.of("GET", "/servlet/adminUsers"), r -> ViewModel.of("adminUsers"));
+        controllerMap.put(Request.of("GET", "/servlet/adminRoles"), r -> ViewModel.of("adminRoles"));
         controllerMap.put(Request.of("GET", "/servlet/product"), Factory.getGetProductByIdController());
         controllerMap.put(Request.of("GET", "/servlet/logout"), Factory.getLogoutController());
+        controllerMap.put(Request.of("POST", "/servlet/login"), Factory.getLoginPageController());
+        controllerMap.put(Request.of("POST", "/servlet/register"), Factory.getRegisterController());
+        controllerMap.put(Request.of("POST", "/servlet/addCategory"), Factory.getGetAdminAddCategoryContorller());
+        controllerMap.put(Request.of("POST", "/servlet/deleteCategory"), Factory.getGetAdminDeleteCategoryContorller());
+
     }
 
     @Override
@@ -48,8 +55,6 @@ public class MainServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
-
-
 
     private void process(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException, SQLException {
         Request request = Request.of(req.getMethod(), req.getRequestURI(), req.getParameterMap(), req.getCookies());

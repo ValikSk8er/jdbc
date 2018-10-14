@@ -17,17 +17,19 @@ public class Category {
     private List<Product> products;
 
     public Category() {
+    }
 
+    public Category(String name) {
+        this.name = name;
     }
 
     public Category(Long id, String name) {
+        this(name);
         this.id = id;
-        this.name = name;
     }
 
     public Category(Long id, String name, List<Product> products) {
-        this.id = id;
-        this.name = name;
+        this(id, name);
         this.products = products;
     }
 

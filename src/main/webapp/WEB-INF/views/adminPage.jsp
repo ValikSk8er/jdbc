@@ -1,4 +1,13 @@
 <%@include file="header.jsp" %>
-    <h1>Admin Page</h1>
+<%@include file="adminLeftMenu.jsp" %>
+
+<div>
+    <h2>Admin page</h2>
+    <h4>Choose a category</h4>
+</div>
+
+
+
+
 </body>
 </html>

@@ -38,5 +38,4 @@ public class ViewModel {
     public void setCookie(Cookie cookie) {
         this.cookie = cookie;
     }
-
 }

@@ -7,9 +7,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="header.jsp" %>
+<div>
     <h3>Product id: ${product.id}</h3>
     <h3>Product name: ${product.name}</h3>
     <h3>Product price: ${product.price}</h3>
     <h3>Product description: ${product.description}</h3>
+</div>
 </body>
 </html>

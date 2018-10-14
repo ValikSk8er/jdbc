@@ -2,6 +2,7 @@ package com.valiksk8.dao;
 
 import com.valiksk8.model.Category;
 import com.valiksk8.model.Product;
+import com.valiksk8.utils.QueryBuilder;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -53,5 +54,11 @@ public class CategoryDaoImpl extends AbstractDao<Category> implements CategoryDa
             resultSet.next();
         }
         return result;
+    }
+
+    @Override
+    public Category findByName(String name) {
+        String query = QueryBuilder.getSelectByParamQuery(Category.class, "CATEGORY_NAME");
+        return simpleConnectAndGetObjectByParam(query, name);
     }
 }
