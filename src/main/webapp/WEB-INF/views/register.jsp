@@ -12,6 +12,10 @@
 
     <h1 class="h3 mb-3 font-weight-normal">Please register</h1>
 
+    <c:if test="${msg}">
+        <p style="color:red">This email already exists</p>
+    </c:if>
+
     <label for="inputEmail" class="sr-only">Email address</label>
 
     <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
