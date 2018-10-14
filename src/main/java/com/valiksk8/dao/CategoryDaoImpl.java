@@ -16,8 +16,7 @@ public class CategoryDaoImpl extends AbstractDao<Category> implements CategoryDa
         super(connection);
     }
 
-    @Override
-    public Category findById(Long id) {
+    public Category findFyllyById(Long id) {
         String query = "SELECT C.ID, C.CATEGORY_NAME, P.ID, P.NAME, P.PRICE, P.DESCRIPTION " +
                 "FROM CATEGORIES C JOIN PRODUCTS P " +
                 "ON C.ID = P.FK_CATEGORIES " +
@@ -60,5 +59,18 @@ public class CategoryDaoImpl extends AbstractDao<Category> implements CategoryDa
     public Category findByName(String name) {
         String query = QueryBuilder.getSelectByParamQuery(Category.class, "CATEGORY_NAME");
         return simpleConnectAndGetObjectByParam(query, name);
+    }
+
+    @Override
+    public void deleteByName(String name) {
+        String query = QueryBuilder.getDeleteByParamQuery(Category.class, "CATEGORY_NAME");
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, name);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

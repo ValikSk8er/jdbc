@@ -17,7 +17,7 @@ public class GetAdminAddCategoryContorller implements Controller {
     CategoryDao categoryDao;
 
     @Override
-    public ViewModel process(Request request) throws SQLException {
+    public ViewModel process(Request request) {
         ViewModel vm = ViewModel.of("adminCategories");
         String categoryName = request.getParamByName("categoryName");
 

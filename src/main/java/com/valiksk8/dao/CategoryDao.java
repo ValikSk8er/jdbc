@@ -8,5 +8,7 @@ import java.util.List;
 public interface CategoryDao extends Dao<Category>{
 
     List<Category> findAll();
+    Category findFyllyById(Long id);
     Category findByName(String name);
+    void deleteByName(String name);
 }

@@ -44,7 +44,11 @@ public class Request {
     }
 
     public String getParamByName(String param) {
-        return params.get(param)[0];
+        try{
+            return params.get(param)[0];
+        } catch(NullPointerException e) {
+            return null;
+        }
     }
 
     @Override

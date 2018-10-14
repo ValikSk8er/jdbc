@@ -15,10 +15,10 @@
 
     <button class="btn btn-lg btn-primary btn-block" type="submit">Add category</button>
 </form>
-<form class="form-deleteCategory" action="<c:url value="/servlet/deleteCategory"/>" method="post">
-    <h4 class="h3 mb-3 font-weight-normal">Delete category</h4>
+<form class="form-deleteCategoryByName" action="<c:url value="/servlet/deleteCategory"/>" method="post">
+    <h4 class="h3 mb-3 font-weight-normal">Delete category by name</h4>
 
-    <c:if test="${msg_delete}">
+    <c:if test="${msg_delete_name}">
         <p style="color:red">The category not exist</p>
     </c:if>
 
@@ -28,6 +28,27 @@
 
     <button class="btn btn-lg btn-primary btn-block" type="submit">Delete category</button>
 </form>
+    <form class="form-deleteCategoryById" action="<c:url value="/servlet/deleteCategory"/>" method="post">
+        <h4 class="h3 mb-3 font-weight-normal">Delete category by id</h4>
+
+        <c:if test="${msg_delete_id}">
+            <p style="color:red">The category not exist</p>
+        </c:if>
+
+        <label for="inputCategoryId" class="sr-only">Category id:</label>
+
+        <input name="categoryId" type="text" id="inputCategoryId" class="form-control" placeholder="Category id" required autofocus>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Delete category</button>
+    </form>
+</div>
+<div>
+    <h3>Categories</h3>
+    <ul>
+        <c:forEach var = "c" items="${categories}">
+            <li> <c:out value="ID: ${c.id} - Name: ${c.name}"/></li>
+        </c:forEach>
+    </ul>
 </div>
 
 </body>

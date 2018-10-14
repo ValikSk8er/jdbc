@@ -2,6 +2,7 @@ package com.valiksk8;
 
 import com.valiksk8.controller.Controller;
 import com.valiksk8.controller.GetAdminAddCategoryContorller;
+import com.valiksk8.controller.GetAdminCategoryController;
 import com.valiksk8.controller.GetAdminDeleteCategoryContorller;
 import com.valiksk8.controller.GetAllCategoriesController;
 import com.valiksk8.controller.GetCategoryByIdController;
@@ -86,5 +87,9 @@ public class Factory {
 
     public static Controller getGetAdminDeleteCategoryContorller() {
         return new GetAdminDeleteCategoryContorller(getCategoryDaoIml(connection));
+    }
+
+    public static Controller getGetAdminCategoryContorller() {
+        return new GetAdminCategoryController(getCategoryDaoIml(connection));
     }
 }

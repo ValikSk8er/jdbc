@@ -25,7 +25,7 @@ public class MainServlet extends HttpServlet {
         controllerMap.put(Request.of("GET", "/servlet/register"), r -> ViewModel.of("register"));
         controllerMap.put(Request.of("GET", "/servlet/home"), r -> ViewModel.of("home"));
         controllerMap.put(Request.of("GET", "/servlet/admin"), r -> ViewModel.of("adminPage"));
-        controllerMap.put(Request.of("GET", "/servlet/adminCategories"), r -> ViewModel.of("adminCategories"));
+        controllerMap.put(Request.of("GET", "/servlet/adminCategories"), Factory.getGetAdminCategoryContorller());
         controllerMap.put(Request.of("GET", "/servlet/adminProducts"), r -> ViewModel.of("adminProducts"));
         controllerMap.put(Request.of("GET", "/servlet/adminUsers"), r -> ViewModel.of("adminUsers"));
         controllerMap.put(Request.of("GET", "/servlet/adminRoles"), r -> ViewModel.of("adminRoles"));
