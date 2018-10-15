@@ -10,8 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import static com.valiksk8.model.Role.RoleName.USER;
-
 public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     public UserDaoImpl(Connection connection) {
@@ -101,5 +99,17 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     public User findByEmail(String email) {
         String query = QueryBuilder.getSelectByParamQuery(User.class,"EMAIL");
         return simpleConnectAndGetObjectByParam(query, email);
+    }
+
+    @Override
+    public void clearRoleOnUserById(Long id) {
+        String query = "DELETE FROM USER_TO_ROLE WHERE FK_USER_ID = ?;";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setLong(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

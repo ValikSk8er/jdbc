@@ -1,8 +1,8 @@
 <%@include file="header.jsp" %>
 <%@include file="adminLeftMenu.jsp" %>
 
-<div>
-    <form class="form-addUser" action="<c:url value="/servlet/adminAddUser"/>" method="post">
+<div class="col-md-4">
+    <form class="form-addUser" action="<c:url value="/servlet/addUser"/>" method="post">
 
     <h4 class="mb-3">Add user</h4>
 
@@ -37,7 +37,7 @@
         </div>
     </div>
 
-    <h4 class="mb-3">Role</h4>
+    <h5 class="mb-3">Roles</h5>
     <div class="d-block my-3">
         <c:forEach var = "r" items="${roles}">
             <div class="custom-control custom-checkbox">
@@ -54,16 +54,46 @@
         <c:if test="${msg_success}">
             <p style="color:green">The user was added</p>
         </c:if>
-    <button class="btn btn-primary btn-lg btn-block" type="submit">Add new user</button>
+    <button class="btn btn-primary btn-block" type="submit">Add new user</button>
 </form>
+
 </div>
-<div>
-    <h3>Users</h3>
-    <ul>
+
+<div class="col-md-4">
+    <table class="table table-striped table-sm">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Email</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+        </tr>
+        </thead>
+        <tbody>
         <c:forEach var = "u" items="${users}">
-            <li> <c:out value="ID: ${u.id} - Email: ${u.email}"/></li>
+            <tr>
+                <td><c:out value="${u.id}"/></td>
+                <td><c:out value="${u.email}"/></td>
+                <td><c:out value="${u.firstName}"/></td>
+                <td><c:out value="${u.lastName}"/></td>
+            </tr>
         </c:forEach>
-    </ul>
+        </tbody>
+    </table>
+    <form class="form-deleteUser" action="<c:url value="/servlet/deleteUser"/>" method="post">
+        <h4 class="mb-3">Delete by email</h4>
+
+        <c:if test="${msg_delete_error}">
+            <p style="color:red">Email not exist</p>
+        </c:if>
+        <c:if test="${msg_delete_success}">
+            <p style="color:green">The user was deleted</p>
+        </c:if>
+        <label for="inputUserEmail" class="sr-only">User email:</label>
+        <input name="email" type="email" id="inputUserEmail" class="form-control" placeholder="User email" required autofocus>
+
+        <button class="btn btn-secondary btn-block" type="submit">Delete user</button>
+    </form>
 </div>
 </body>
 </html>

@@ -1,151 +1,87 @@
 <%@include file="header.jsp" %>
 <%@include file="adminLeftMenu.jsp" %>
 
-<form class="needs-validation" novalidate="">
-    <h4 class="mb-3">Add product</h4>
-    <div class="row">
-        <div class="col-md-6 mb-3">
-            <label for="firstName">First name</label>
-            <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
-            <div class="invalid-feedback">
-                Valid first name is required.
-            </div>
-        </div>
-        <div class="col-md-6 mb-3">
-            <label for="lastName">Last name</label>
-            <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
-            <div class="invalid-feedback">
-                Valid last name is required.
-            </div>
-        </div>
-    </div>
+<div class="col-md-4">
+    <form class="form-addProduct" action="<c:url value="/servlet/addProduct"/>" method="post">
 
-    <div class="mb-3">
-        <label for="username">Username</label>
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text">@</span>
-            </div>
-            <input type="text" class="form-control" id="username" placeholder="Username" required="">
-            <div class="invalid-feedback" style="width: 100%;">
-                Your username is required.
-            </div>
-        </div>
-    </div>
+        <h4 class="mb-3">Add product</h4>
 
-    <div class="mb-3">
-        <label for="email">Email <span class="text-muted">(Optional)</span></label>
-        <input type="email" class="form-control" id="email" placeholder="you@example.com">
-        <div class="invalid-feedback">
-            Please enter a valid email address for shipping updates.
+        <div class="mb-3">
+            <label for="email">Name</label>
+            <input name="name" type="text" class="form-control" id="email" placeholder="Product name" required>
+            <div class="invalid-feedback">
+                Valid name is required.
+            </div>
         </div>
-    </div>
+        <div class="mb-3">
+            <label for="inputDescription">Description</label>
+            <input name="description" type="text" id="inputDescription" class="form-control" placeholder="Description" required>
+            <div class="invalid-feedback">
+                Valid description is required.
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="inputPrice">Price</label>
+                <input name="price" type="text" class="form-control" id="inputPrice" placeholder="Price" value="" required>
+                <div class="invalid-feedback">
+                    Valid price is required.
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="inputCategoryId">Category id</label>
+                <input type="text" class="form-control" id="inputCategoryId" name="categoryId" placeholder="Category id" value="" required>
+                <div class="invalid-feedback">
+                    Valid category id is required.
+                </div>
+            </div>
+        </div>
 
-    <div class="mb-3">
-        <label for="address">Address</label>
-        <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="">
-        <div class="invalid-feedback">
-            Please enter your shipping address.
-        </div>
-    </div>
+        <c:if test="${msg_success}">
+            <p style="color:green">The product was added</p>
+        </c:if>
+        <button class="btn btn-primary btn-block" type="submit">Add new product</button>
+    </form>
 
-    <div class="mb-3">
-        <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
-        <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
-    </div>
+</div>
 
-    <div class="row">
-        <div class="col-md-5 mb-3">
-            <label for="country">Country</label>
-            <select class="custom-select d-block w-100" id="country" required="">
-                <option value="">Choose...</option>
-                <option>United States</option>
-            </select>
-            <div class="invalid-feedback">
-                Please select a valid country.
-            </div>
-        </div>
-        <div class="col-md-4 mb-3">
-            <label for="state">State</label>
-            <select class="custom-select d-block w-100" id="state" required="">
-                <option value="">Choose...</option>
-                <option>California</option>
-            </select>
-            <div class="invalid-feedback">
-                Please provide a valid state.
-            </div>
-        </div>
-        <div class="col-md-3 mb-3">
-            <label for="zip">Zip</label>
-            <input type="text" class="form-control" id="zip" placeholder="" required="">
-            <div class="invalid-feedback">
-                Zip code required.
-            </div>
-        </div>
-    </div>
-    <hr class="mb-4">
-    <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="same-address">
-        <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
-    </div>
-    <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="save-info">
-        <label class="custom-control-label" for="save-info">Save this information for next time</label>
-    </div>
-    <hr class="mb-4">
+<div class="col-md-4">
+    <table class="table table-striped table-sm">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Category Id</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var = "p" items="${products}">
+            <tr>
+                <td><c:out value="${p.id}"/></td>
+                <td><c:out value="${p.name}"/></td>
+                <td><c:out value="${p.description}"/></td>
+                <td><c:out value="${p.price}"/></td>
+                <td><c:out value="${p.category_id}"/></td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+    <form class="form-deleteProduct" action="<c:url value="/servlet/deleteProduct"/>" method="post">
+        <h4 class="mb-3">Delete by id</h4>
 
-    <h4 class="mb-3">Payment</h4>
+        <c:if test="${msg_delete_error}">
+            <p style="color:red">Product with id not exist</p>
+        </c:if>
+        <c:if test="${msg_delete_success}">
+            <p style="color:green">The product was deleted</p>
+        </c:if>
+        <label for="inputProductId" class="sr-only">Product id:</label>
+        <input name="productId" type="text" id="inputProductId" class="form-control" placeholder="Product id" required autofocus>
 
-    <div class="d-block my-3">
-        <div class="custom-control custom-radio">
-            <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked="" required="">
-            <label class="custom-control-label" for="credit">Credit card</label>
-        </div>
-        <div class="custom-control custom-radio">
-            <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required="">
-            <label class="custom-control-label" for="debit">Debit card</label>
-        </div>
-        <div class="custom-control custom-radio">
-            <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required="">
-            <label class="custom-control-label" for="paypal">PayPal</label>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6 mb-3">
-            <label for="cc-name">Name on card</label>
-            <input type="text" class="form-control" id="cc-name" placeholder="" required="">
-            <small class="text-muted">Full name as displayed on card</small>
-            <div class="invalid-feedback">
-                Name on card is required
-            </div>
-        </div>
-        <div class="col-md-6 mb-3">
-            <label for="cc-number">Credit card number</label>
-            <input type="text" class="form-control" id="cc-number" placeholder="" required="">
-            <div class="invalid-feedback">
-                Credit card number is required
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3 mb-3">
-            <label for="cc-expiration">Expiration</label>
-            <input type="text" class="form-control" id="cc-expiration" placeholder="" required="">
-            <div class="invalid-feedback">
-                Expiration date required
-            </div>
-        </div>
-        <div class="col-md-3 mb-3">
-            <label for="cc-cvv">CVV</label>
-            <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
-            <div class="invalid-feedback">
-                Security code required
-            </div>
-        </div>
-    </div>
-    <hr class="mb-4">
-    <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
-</form>
-
+        <button class="btn btn-secondary btn-block" type="submit">Delete product</button>
+    </form>
+</div>
 </body>
 </html>

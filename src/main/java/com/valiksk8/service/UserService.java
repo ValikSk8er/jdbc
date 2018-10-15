@@ -11,4 +11,5 @@ public interface UserService extends Service<User>{
     User findByEmail(String email);
     boolean validatePassword(User user, String password);
     boolean isRegistered(String email);
+    void clearRoleOnUserById(Long id);
 }

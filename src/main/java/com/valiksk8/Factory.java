@@ -1,6 +1,9 @@
 package com.valiksk8;
 
 import com.valiksk8.controller.AdminAddUserController;
+import com.valiksk8.controller.AdminDeleteUserController;
+import com.valiksk8.controller.AdminProductsController;
+import com.valiksk8.controller.AdminRolesController;
 import com.valiksk8.controller.AdminUsersController;
 import com.valiksk8.controller.Controller;
 import com.valiksk8.controller.AdminAddCategoryContorller;
@@ -104,5 +107,17 @@ public class Factory {
 
     public static Controller getAdminAddUserController() {
         return new AdminAddUserController(getUserService());
+    }
+
+    public static Controller getAdminRolesController() {
+        return new AdminRolesController();
+    }
+
+    public static Controller getAdminProductsController() {
+        return new AdminProductsController(getProductService());
+    }
+
+    public static Controller getAdminDeleteUserController() {
+        return new AdminDeleteUserController(getUserService());
     }
 }
