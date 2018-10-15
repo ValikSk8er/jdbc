@@ -14,6 +14,8 @@ import com.valiksk8.controller.RegisterController;
 import com.valiksk8.dao.CategoryDaoImpl;
 import com.valiksk8.dao.ProductDaoImpl;
 import com.valiksk8.dao.UserDaoImpl;
+import com.valiksk8.service.CategoryServiceImpl;
+import com.valiksk8.service.ProductServiceImpl;
 import com.valiksk8.service.UserServiceImpl;
 
 import java.sql.Connection;
@@ -38,43 +40,46 @@ public class Factory {
         return connection;
     }
 
-    public static GetAllCategoriesController getAllCategoriesController() {
-        return new GetAllCategoriesController(getCategoryDaoIml(getConnection()));
-    }
-
-    public static CategoryDaoImpl getCategoryDaoIml(Connection connection) {
-        return new CategoryDaoImpl(connection);
-    }
-
     public static PageNotFoundController getPageNotFoundController() {
         return new PageNotFoundController();
-    }
-
-    public static GetCategoryByIdController getGetCategoryByIdController() {
-        return new GetCategoryByIdController(getCategoryDaoIml(getConnection()));
-    }
-
-    public static LoginController getLoginPageController() {
-        return new LoginController(getUserService());
-    }
-    public static UserServiceImpl getUserService() {
-        return new UserServiceImpl(getUserDao());
-    }
-
-    public static RegisterController getRegisterController() {
-        return new RegisterController(getUserService());
     }
 
     public static UserDaoImpl getUserDao() {
         return new UserDaoImpl(connection);
     }
 
-    public static ProductDaoImpl getProductDaoImpl(Connection connection) {
+    public static ProductDaoImpl getProductDao() {
         return new ProductDaoImpl(connection);
     }
 
+    public static CategoryDaoImpl getCategoryDao() { return new CategoryDaoImpl(connection); }
+
+    public static UserServiceImpl getUserService() {
+        return new UserServiceImpl(getUserDao());
+    }
+
+    public static ProductServiceImpl getProductService() { return new ProductServiceImpl(getProductDao()); }
+
+    public static CategoryServiceImpl getCategoryService() { return new CategoryServiceImpl(getCategoryDao()); }
+
+    public static GetAllCategoriesController getAllCategoriesController() {
+        return new GetAllCategoriesController(getCategoryService());
+    }
+
+    public static GetCategoryByIdController getGetCategoryByIdController() {
+        return new GetCategoryByIdController(getCategoryService());
+    }
+
     public static GetProductByIdController getGetProductByIdController() {
-        return new GetProductByIdController(getProductDaoImpl(connection));
+        return new GetProductByIdController(getProductService());
+    }
+
+    public static LoginController getLoginPageController() {
+        return new LoginController(getUserService());
+    }
+
+    public static RegisterController getRegisterController() {
+        return new RegisterController(getUserService());
     }
 
     public static Controller getLogoutController() {
@@ -82,14 +87,14 @@ public class Factory {
     }
 
     public static Controller getGetAdminAddCategoryContorller() {
-        return new GetAdminAddCategoryContorller(getCategoryDaoIml(connection));
+        return new GetAdminAddCategoryContorller(getCategoryService());
     }
 
     public static Controller getGetAdminDeleteCategoryContorller() {
-        return new GetAdminDeleteCategoryContorller(getCategoryDaoIml(connection));
+        return new GetAdminDeleteCategoryContorller(getCategoryService());
     }
 
     public static Controller getGetAdminCategoryContorller() {
-        return new GetAdminCategoryController(getCategoryDaoIml(connection));
+        return new GetAdminCategoryController(getCategoryService());
     }
 }

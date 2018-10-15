@@ -16,7 +16,7 @@ public class CategoryDaoImpl extends AbstractDao<Category> implements CategoryDa
         super(connection);
     }
 
-    public Category findFyllyById(Long id) {
+    public Category findWithProductById(Long id) {
         String query = "SELECT C.ID, C.CATEGORY_NAME, P.ID, P.NAME, P.PRICE, P.DESCRIPTION " +
                 "FROM CATEGORIES C JOIN PRODUCTS P " +
                 "ON C.ID = P.FK_CATEGORIES " +

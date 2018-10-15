@@ -11,6 +11,6 @@ public class GetAdminController implements Controller {
     @Override
     public ViewModel process(Request request) throws SQLException {
         ViewModel vm = ViewModel.of("adminPage");
-        return null;
+        return vm;
     }
 }

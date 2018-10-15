@@ -7,6 +7,7 @@ import com.valiksk8.model.User;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.UUID;
 
 import static com.valiksk8.model.Role.RoleName.USER;
@@ -19,12 +20,37 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findById(Long id) {
+        return userDao.findById(id);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userDao.findAll();
+    }
+
+    @Override
+    public void add(User user) {
+        userDao.addUser(user);
+    }
+
+    @Override
     public User addUser(User user) {
         String hashedPassword = hashPassword(user.getPassword());
         user.setPassword(hashedPassword);
         user.setToken(getToken());
         user.addRole(getDefaultRole());
         return userDao.addUser(user);
+    }
+
+    @Override
+    public void updateById(Long id, User user) {
+        userDao.updateById(id, user);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        userDao.deleteById(id);
     }
 
 

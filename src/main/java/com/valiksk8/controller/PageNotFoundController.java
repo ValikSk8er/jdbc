@@ -8,6 +8,4 @@ public class PageNotFoundController implements Controller {
     public ViewModel process(Request request) {
         return ViewModel.of("404");
     }
-
-
 }
