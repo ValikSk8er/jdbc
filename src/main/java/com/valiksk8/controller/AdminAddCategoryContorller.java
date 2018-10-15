@@ -7,9 +7,9 @@ import com.valiksk8.web.ViewModel;
 
 import java.util.List;
 
-public class GetAdminAddCategoryContorller implements Controller {
+public class AdminAddCategoryContorller implements Controller {
 
-    public GetAdminAddCategoryContorller(CategoryService categoryService) {
+    public AdminAddCategoryContorller(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
 
@@ -25,6 +25,7 @@ public class GetAdminAddCategoryContorller implements Controller {
             vm.addAttribute("msg_add", true);
         } else {
             categoryService.addByName(categoryName);
+            vm.addAttribute("msg_add_success", true);
         }
         List<Category> categories = categoryService.findAll();
         vm.addAttribute("categories", categories);

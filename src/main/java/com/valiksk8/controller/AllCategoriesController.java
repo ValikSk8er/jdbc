@@ -7,18 +7,18 @@ import com.valiksk8.web.ViewModel;
 
 import java.util.List;
 
-public class GetAdminCategoryController implements Controller{
+public class AllCategoriesController implements Controller {
 
-    CategoryService categoryService;
+    private final CategoryService categoryService;
 
-    public GetAdminCategoryController(CategoryService categoryService) {
-        this.categoryService = categoryService;
+    public AllCategoriesController(CategoryService categoryDao) {
+        this.categoryService = categoryDao;
     }
 
     @Override
     public ViewModel process(Request request) {
-        ViewModel vm = ViewModel.of("adminCategories");
         List<Category> categories = categoryService.findAll();
+        ViewModel vm = ViewModel.of("categories");
         vm.addAttribute("categories", categories);
         return vm;
     }

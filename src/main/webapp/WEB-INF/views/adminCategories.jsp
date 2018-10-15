@@ -8,6 +8,9 @@
     <c:if test="${msg_add}">
         <p style="color:red">The category already exist</p>
     </c:if>
+    <c:if test="${msg_add_success}">
+        <p style="color:green">The category was added</p>
+    </c:if>
 
     <label for="inputCategory" class="sr-only">Category name:</label>
 
@@ -21,7 +24,9 @@
     <c:if test="${msg_delete_name}">
         <p style="color:red">The category not exist</p>
     </c:if>
-
+    <c:if test="${msg_delete_name_success}">
+        <p style="color:green">The category was deleted</p>
+    </c:if>
     <label for="inputCategory" class="sr-only">Category name:</label>
 
     <input name="categoryName" type="text" id="inputCategory" class="form-control" placeholder="Category name" required autofocus>
@@ -32,9 +37,11 @@
         <h4 class="h3 mb-3 font-weight-normal">Delete category by id</h4>
 
         <c:if test="${msg_delete_id}">
-            <p style="color:red">The category not exist</p>
+            <p style="color:red">The category id not exist</p>
         </c:if>
-
+        <c:if test="${msg_delete_id_success}">
+            <p style="color:green">The category was deleted</p>
+        </c:if>
         <label for="inputCategoryId" class="sr-only">Category id:</label>
 
         <input name="categoryId" type="text" id="inputCategoryId" class="form-control" placeholder="Category id" required autofocus>

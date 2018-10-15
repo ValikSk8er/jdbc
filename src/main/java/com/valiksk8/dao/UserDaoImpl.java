@@ -27,7 +27,6 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
         PreparedStatement userStatement;
         PreparedStatement roleStatement;
 
-
         try {
             connection.setAutoCommit(false);
 
@@ -48,11 +47,13 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
                 connection.rollback();
             }
 
-            roleStatement = connection.prepareStatement(roleQuery);
-            roleStatement.setLong(1, userId);
-            roleStatement.setString(2, USER.toString());
-            roleStatement.executeUpdate();
-            connection.commit();
+            for(Role role : user.getRoles()) {
+                roleStatement = connection.prepareStatement(roleQuery);
+                roleStatement.setLong(1, userId);
+                roleStatement.setString(2, role.getRoleName().toString());
+                roleStatement.executeUpdate();
+                connection.commit();
+            }
         } catch (SQLException e) {
             e.getMessage();
             try {

@@ -5,10 +5,10 @@ import com.valiksk8.service.CategoryService;
 import com.valiksk8.web.Request;
 import com.valiksk8.web.ViewModel;
 
-public class GetCategoryByIdController implements Controller{
+public class CategoryByIdController implements Controller{
     private final CategoryService categoryService;
 
-    public GetCategoryByIdController(CategoryService categoryService) {
+    public CategoryByIdController(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
 

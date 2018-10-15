@@ -35,13 +35,16 @@ public class User {
         this.password = password;
     }
 
-    public User(Long id, String email, String password, String token, String firstName, String lastName) {
-        this.id = id;
-        this.email = email;
-        this.token = token;
-        this.password = password;
+    public User(String email, String password, String firstName, String lastName) {
+        this(email, password);
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public User(Long id, String email, String password, String token, String firstName, String lastName) {
+        this(email, password, firstName, lastName);
+        this.id = id;
+        this.token = token;
     }
 
     public Long getId() {

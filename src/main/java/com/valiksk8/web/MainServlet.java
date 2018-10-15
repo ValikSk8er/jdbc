@@ -20,21 +20,22 @@ public class MainServlet extends HttpServlet {
 
     static {
         controllerMap.put(Request.of("GET", "/servlet/categories"), Factory.getAllCategoriesController());
-        controllerMap.put(Request.of("GET", "/servlet/category"), Factory.getGetCategoryByIdController());
+        controllerMap.put(Request.of("GET", "/servlet/category"), Factory.getCategoryByIdController());
         controllerMap.put(Request.of("GET", "/servlet/login"), r -> ViewModel.of("login"));
         controllerMap.put(Request.of("GET", "/servlet/register"), r -> ViewModel.of("register"));
         controllerMap.put(Request.of("GET", "/servlet/home"), r -> ViewModel.of("home"));
-        controllerMap.put(Request.of("GET", "/servlet/admin"), r -> ViewModel.of("adminPage"));
-        controllerMap.put(Request.of("GET", "/servlet/adminCategories"), Factory.getGetAdminCategoryContorller());
-        controllerMap.put(Request.of("GET", "/servlet/adminProducts"), r -> ViewModel.of("adminProducts"));
-        controllerMap.put(Request.of("GET", "/servlet/adminUsers"), r -> ViewModel.of("adminUsers"));
-        controllerMap.put(Request.of("GET", "/servlet/adminRoles"), r -> ViewModel.of("adminRoles"));
-        controllerMap.put(Request.of("GET", "/servlet/product"), Factory.getGetProductByIdController());
+        controllerMap.put(Request.of("GET", "/servlet/product"), Factory.getProductByIdController());
         controllerMap.put(Request.of("GET", "/servlet/logout"), Factory.getLogoutController());
+        controllerMap.put(Request.of("GET", "/servlet/admin"), r -> ViewModel.of("adminPage"));
+        controllerMap.put(Request.of("GET", "/servlet/adminCategories"), Factory.getAdminCategoriesContorller());
+        controllerMap.put(Request.of("GET", "/servlet/adminProducts"), r -> ViewModel.of("adminProducts"));
+        controllerMap.put(Request.of("GET", "/servlet/adminUsers"), Factory.getAdminUsersController());
+        controllerMap.put(Request.of("GET", "/servlet/adminRoles"), r -> ViewModel.of("adminRoles"));
         controllerMap.put(Request.of("POST", "/servlet/login"), Factory.getLoginPageController());
         controllerMap.put(Request.of("POST", "/servlet/register"), Factory.getRegisterController());
-        controllerMap.put(Request.of("POST", "/servlet/addCategory"), Factory.getGetAdminAddCategoryContorller());
-        controllerMap.put(Request.of("POST", "/servlet/deleteCategory"), Factory.getGetAdminDeleteCategoryContorller());
+        controllerMap.put(Request.of("POST", "/servlet/addCategory"), Factory.getAdminAddCategoryContorller());
+        controllerMap.put(Request.of("POST", "/servlet/deleteCategory"), Factory.getAdminDeleteCategoryContorller());
+        controllerMap.put(Request.of("POST", "/servlet/adminAddUser"), Factory.getAdminAddUserController());
 
     }
 

@@ -8,7 +8,7 @@
 --%>
 <html>
 <head>
-    <title>${pageContext.request.contextPath}</title>
+    <title>Mate</title>
 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           rel="stylesheet"

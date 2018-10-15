@@ -1,25 +1,22 @@
 package com.valiksk8.controller;
 
-import com.valiksk8.dao.CategoryDao;
-import com.valiksk8.dao.CategoryDaoImpl;
 import com.valiksk8.model.Category;
 import com.valiksk8.service.CategoryService;
 import com.valiksk8.web.Request;
 import com.valiksk8.web.ViewModel;
 
-import java.sql.SQLException;
 import java.util.List;
 
-public class GetAdminDeleteCategoryContorller implements Controller {
+public class AdminDeleteCategoryContorller implements Controller {
 
     CategoryService categoryService;
 
-    public GetAdminDeleteCategoryContorller(CategoryService categoryService) {
+    public AdminDeleteCategoryContorller(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
 
     @Override
-    public ViewModel process(Request request) throws SQLException {
+    public ViewModel process(Request request) {
         ViewModel vm;
         String categoryName = request.getParamByName("categoryName");
         String categoryId = request.getParamByName("categoryId");
@@ -47,6 +44,7 @@ public class GetAdminDeleteCategoryContorller implements Controller {
             vm.addAttribute("msg_delete_id", true);
         } else {
             categoryService.deleteById(id);
+            vm.addAttribute("msg_delete_id_success", true);
         }
         return vm;
     }
@@ -59,6 +57,7 @@ public class GetAdminDeleteCategoryContorller implements Controller {
             vm.addAttribute("msg_delete_name", true);
         } else {
             categoryService.deleteByName(categoryName);
+            vm.addAttribute("msg_delete_name_success", true);
         }
         return vm;
     }

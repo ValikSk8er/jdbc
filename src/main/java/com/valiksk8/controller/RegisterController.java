@@ -18,7 +18,8 @@ public class RegisterController implements Controller {
         String email = request.getParamByName("email");
         String password = request.getParamByName("password");
         ViewModel vm;
-        if (isRegistered(email)) {
+        boolean isExist = userService.isRegistered(email);
+        if (isExist) {
             vm = processUnregister();
         } else {
             User user = new User(email, password);
@@ -37,9 +38,5 @@ public class RegisterController implements Controller {
         ViewModel vm = ViewModel.of("register");
         vm.addAttribute("msg", true);
         return vm;
-    }
-
-    private boolean isRegistered(String email) {
-        return userService.findByEmail(email) != null ? true : false;
     }
 }

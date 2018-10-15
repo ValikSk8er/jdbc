@@ -7,7 +7,10 @@ import com.valiksk8.model.User;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import static com.valiksk8.model.Role.RoleName.USER;
@@ -35,12 +38,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User addUser(User user) {
+    public User addUserWithRoles(User user, Set<Role> roles) {
         String hashedPassword = hashPassword(user.getPassword());
         user.setPassword(hashedPassword);
         user.setToken(getToken());
-        user.addRole(getDefaultRole());
+        user.setRoles(roles);
         return userDao.addUser(user);
+    }
+
+    @Override
+    public User addUser(User user) {
+        Set<Role> roles = new HashSet<>(Arrays.asList(getDefaultRole()));
+        return addUserWithRoles(user, roles);
     }
 
     @Override
@@ -52,7 +61,6 @@ public class UserServiceImpl implements UserService {
     public void deleteById(Long id) {
         userDao.deleteById(id);
     }
-
 
     @Override
     public User findByEmail(String email) {
@@ -68,6 +76,11 @@ public class UserServiceImpl implements UserService {
             result = hashedPassword.equals(user.getPassword());
         }
         return result;
+    }
+
+    @Override
+    public boolean isRegistered(String email) {
+        return findByEmail(email) != null ? true : false;
     }
 
     private String getToken() {

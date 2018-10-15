@@ -1,12 +1,14 @@
 package com.valiksk8;
 
+import com.valiksk8.controller.AdminAddUserController;
+import com.valiksk8.controller.AdminUsersController;
 import com.valiksk8.controller.Controller;
-import com.valiksk8.controller.GetAdminAddCategoryContorller;
-import com.valiksk8.controller.GetAdminCategoryController;
-import com.valiksk8.controller.GetAdminDeleteCategoryContorller;
-import com.valiksk8.controller.GetAllCategoriesController;
-import com.valiksk8.controller.GetCategoryByIdController;
-import com.valiksk8.controller.GetProductByIdController;
+import com.valiksk8.controller.AdminAddCategoryContorller;
+import com.valiksk8.controller.AdminCategoriesController;
+import com.valiksk8.controller.AdminDeleteCategoryContorller;
+import com.valiksk8.controller.AllCategoriesController;
+import com.valiksk8.controller.CategoryByIdController;
+import com.valiksk8.controller.ProductByIdController;
 import com.valiksk8.controller.LoginController;
 import com.valiksk8.controller.LogoutController;
 import com.valiksk8.controller.PageNotFoundController;
@@ -40,9 +42,7 @@ public class Factory {
         return connection;
     }
 
-    public static PageNotFoundController getPageNotFoundController() {
-        return new PageNotFoundController();
-    }
+    public static PageNotFoundController getPageNotFoundController() { return new PageNotFoundController(); }
 
     public static UserDaoImpl getUserDao() {
         return new UserDaoImpl(connection);
@@ -62,16 +62,16 @@ public class Factory {
 
     public static CategoryServiceImpl getCategoryService() { return new CategoryServiceImpl(getCategoryDao()); }
 
-    public static GetAllCategoriesController getAllCategoriesController() {
-        return new GetAllCategoriesController(getCategoryService());
+    public static AllCategoriesController getAllCategoriesController() {
+        return new AllCategoriesController(getCategoryService());
     }
 
-    public static GetCategoryByIdController getGetCategoryByIdController() {
-        return new GetCategoryByIdController(getCategoryService());
+    public static CategoryByIdController getCategoryByIdController() {
+        return new CategoryByIdController(getCategoryService());
     }
 
-    public static GetProductByIdController getGetProductByIdController() {
-        return new GetProductByIdController(getProductService());
+    public static ProductByIdController getProductByIdController() {
+        return new ProductByIdController(getProductService());
     }
 
     public static LoginController getLoginPageController() {
@@ -86,15 +86,23 @@ public class Factory {
         return new LogoutController();
     }
 
-    public static Controller getGetAdminAddCategoryContorller() {
-        return new GetAdminAddCategoryContorller(getCategoryService());
+    public static Controller getAdminAddCategoryContorller() {
+        return new AdminAddCategoryContorller(getCategoryService());
     }
 
-    public static Controller getGetAdminDeleteCategoryContorller() {
-        return new GetAdminDeleteCategoryContorller(getCategoryService());
+    public static Controller getAdminDeleteCategoryContorller() {
+        return new AdminDeleteCategoryContorller(getCategoryService());
     }
 
-    public static Controller getGetAdminCategoryContorller() {
-        return new GetAdminCategoryController(getCategoryService());
+    public static Controller getAdminCategoriesContorller() {
+        return new AdminCategoriesController(getCategoryService());
+    }
+
+    public static Controller getAdminUsersController() {
+        return new AdminUsersController(getUserService());
+    }
+
+    public static Controller getAdminAddUserController() {
+        return new AdminAddUserController(getUserService());
     }
 }

@@ -6,11 +6,11 @@ import com.valiksk8.service.ProductService;
 import com.valiksk8.web.Request;
 import com.valiksk8.web.ViewModel;
 
-public class GetProductByIdController implements Controller {
+public class ProductByIdController implements Controller {
 
     private final ProductService productService;
 
-    public GetProductByIdController(ProductService productService) {
+    public ProductByIdController(ProductService productService) {
         this.productService = productService;
     }
 
