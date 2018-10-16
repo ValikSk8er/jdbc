@@ -18,7 +18,7 @@
 
             <label for="inputRole" class="sr-only">Role name:</label>
 
-            <input name="categoryName" type="text" id="inputRole" class="form-control" placeholder="Role name" required autofocus>
+            <input name="name" type="text" id="inputRole" class="form-control" placeholder="Role name" required autofocus>
                 <button class="btn btn-primary btn-block" type="submit">Add role</button>
             </div>
         </form>
@@ -31,14 +31,14 @@
 
 
                 <c:if test="${msg_delete_error}">
-                    <p style="color:red">The role not exist</p>
+                    <p style="color:red">The role name not exist</p>
                 </c:if>
                 <c:if test="${msg_delete_success}">
                     <p style="color:green">The role was deleted</p>
                 </c:if>
                 <label for="inputRole" class="sr-only">Role name:</label>
 
-                <input name="categoryName" type="text" id="inputRole" class="form-control" placeholder="Role name" required autofocus>
+                <input name="name" type="text" id="inputRole" class="form-control" placeholder="Role name" required autofocus>
                 <button class="btn btn-secondary btn-block" type="submit">Delete role</button>
 
             </div>

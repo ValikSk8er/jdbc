@@ -1,5 +1,6 @@
-package com.valiksk8.controller;
+package com.valiksk8.controller.Admin;
 
+import com.valiksk8.controller.Controller;
 import com.valiksk8.web.Request;
 import com.valiksk8.web.ViewModel;
 

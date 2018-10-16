@@ -37,7 +37,8 @@ public class MainServlet extends HttpServlet {
         controllerMap.put(Request.of("POST", "/servlet/deleteCategory"), Factory.getAdminDeleteCategoryContorller());
         controllerMap.put(Request.of("POST", "/servlet/addUser"), Factory.getAdminAddUserController());
         controllerMap.put(Request.of("POST", "/servlet/deleteUser"), Factory.getAdminDeleteUserController());
-
+        controllerMap.put(Request.of("POST", "/servlet/addProduct"), Factory.getAdminAddProductController());
+        controllerMap.put(Request.of("POST", "/servlet/deleteProduct"), Factory.getAdminDeleteProductController());
     }
 
     @Override

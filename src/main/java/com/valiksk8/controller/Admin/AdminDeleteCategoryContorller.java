@@ -1,5 +1,6 @@
-package com.valiksk8.controller;
+package com.valiksk8.controller.Admin;
 
+import com.valiksk8.controller.Controller;
 import com.valiksk8.model.Category;
 import com.valiksk8.service.CategoryService;
 import com.valiksk8.web.Request;
@@ -38,7 +39,7 @@ public class AdminDeleteCategoryContorller implements Controller {
     private ViewModel processDeleteCategoryById(String categoryId) {
         ViewModel vm = ViewModel.of("adminCategories");
         Long id = Long.parseLong(categoryId);
-        boolean isNotExist = !categoryService.checkCategoryExist(id);
+        boolean isNotExist = categoryService.findById(id) == null;
 
         if (isNotExist) {
             vm.addAttribute("msg_delete_id", true);
@@ -51,7 +52,7 @@ public class AdminDeleteCategoryContorller implements Controller {
 
     private ViewModel processDeleteCategoryByName(String categoryName) {
         ViewModel vm = ViewModel.of("adminCategories");
-        boolean isNotExist =!categoryService.checkCategoryExist(categoryName);
+        boolean isNotExist =categoryService.findByName(categoryName) != null;
 
         if (isNotExist) {
             vm.addAttribute("msg_delete_name", true);

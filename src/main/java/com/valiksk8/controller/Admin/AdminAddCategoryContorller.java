@@ -1,5 +1,6 @@
-package com.valiksk8.controller;
+package com.valiksk8.controller.Admin;
 
+import com.valiksk8.controller.Controller;
 import com.valiksk8.model.Category;
 import com.valiksk8.service.CategoryService;
 import com.valiksk8.web.Request;
@@ -19,7 +20,7 @@ public class AdminAddCategoryContorller implements Controller {
     public ViewModel process(Request request) {
         ViewModel vm = ViewModel.of("adminCategories");
         String categoryName = request.getParamByName("categoryName");
-        boolean isExist = categoryService.checkCategoryExist(categoryName);
+        boolean isExist = categoryService.findByName(categoryName) != null;
 
         if (isExist) {
             vm.addAttribute("msg_add", true);
@@ -31,5 +32,4 @@ public class AdminAddCategoryContorller implements Controller {
         vm.addAttribute("categories", categories);
         return vm;
     }
-
 }

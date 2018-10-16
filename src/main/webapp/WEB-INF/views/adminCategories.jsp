@@ -32,7 +32,7 @@
                 </c:if>
                 <label for="inputCategoryId" class="sr-only">Category id:</label>
 
-                <input name="categoryId" type="text" id="inputCategoryId" class="form-control" placeholder="Category id" required autofocus>
+                <input name="categoryId" type="number" id="inputCategoryId" class="form-control" placeholder="Category id" required autofocus>
 
                 <button class="btn btn-secondary btn-block" type="submit">Delete category</button>
             </form>
@@ -42,7 +42,7 @@
                 <h5 class="mb-3 font-weight-normal">Delete by name</h5>
 
                 <c:if test="${msg_delete_name}">
-                    <p style="color:red">The category not exist</p>
+                    <p style="color:red">The category name not exist</p>
                 </c:if>
                 <c:if test="${msg_delete_name_success}">
                     <p style="color:green">The category was deleted</p>

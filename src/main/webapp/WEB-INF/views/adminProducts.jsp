@@ -23,21 +23,24 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="inputPrice">Price</label>
-                <input name="price" type="text" class="form-control" id="inputPrice" placeholder="Price" value="" required>
+                <input name="price" type="number" class="form-control" id="inputPrice" placeholder="Price" value="" required>
                 <div class="invalid-feedback">
                     Valid price is required.
                 </div>
             </div>
             <div class="col-md-6 mb-3">
                 <label for="inputCategoryId">Category id</label>
-                <input type="text" class="form-control" id="inputCategoryId" name="categoryId" placeholder="Category id" value="" required>
+                <input type="number" class="form-control" id="inputCategoryId" name="categoryId" placeholder="Category id" value="" required>
                 <div class="invalid-feedback">
                     Valid category id is required.
                 </div>
             </div>
         </div>
 
-        <c:if test="${msg_success}">
+        <c:if test="${msg_add_error}">
+            <p style="color:red">The product with this name exist</p>
+        </c:if>
+        <c:if test="${msg_add_success}">
             <p style="color:green">The product was added</p>
         </c:if>
         <button class="btn btn-primary btn-block" type="submit">Add new product</button>
@@ -72,13 +75,13 @@
         <h4 class="mb-3">Delete by id</h4>
 
         <c:if test="${msg_delete_error}">
-            <p style="color:red">Product with id not exist</p>
+            <p style="color:red">Product id not exist</p>
         </c:if>
         <c:if test="${msg_delete_success}">
             <p style="color:green">The product was deleted</p>
         </c:if>
         <label for="inputProductId" class="sr-only">Product id:</label>
-        <input name="productId" type="text" id="inputProductId" class="form-control" placeholder="Product id" required autofocus>
+        <input name="productId" type="number" id="inputProductId" class="form-control" placeholder="Product id" required autofocus>
 
         <button class="btn btn-secondary btn-block" type="submit">Delete product</button>
     </form>

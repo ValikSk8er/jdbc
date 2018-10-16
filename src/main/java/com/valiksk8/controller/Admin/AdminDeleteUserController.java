@@ -1,5 +1,6 @@
-package com.valiksk8.controller;
+package com.valiksk8.controller.Admin;
 
+import com.valiksk8.controller.Controller;
 import com.valiksk8.model.Role;
 import com.valiksk8.model.User;
 import com.valiksk8.service.UserService;
@@ -25,7 +26,7 @@ public class AdminDeleteUserController implements Controller {
         if (isNotExist) {
             vm.addAttribute("msg_delete_error", true);
         } else {
-            processDeleteByEmail(email);
+            userService.deleteByEmail(email);
             vm.addAttribute("msg_delete_success", true);
         }
         List<Role.RoleName> roleNames = Arrays.asList(Role.RoleName.values());
@@ -33,10 +34,5 @@ public class AdminDeleteUserController implements Controller {
         vm.addAttribute("roles", roleNames);
         vm.addAttribute("users", users);
         return vm;
-    }
-
-    private void processDeleteByEmail(String email) {
-        User user = userService.findByEmail(email);
-        userService.deleteById(user.getId());
     }
 }

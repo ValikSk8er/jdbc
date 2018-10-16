@@ -18,6 +18,10 @@ public class Product {
     @ColumnName("DESCRIPTION")
     private String description;
 
+    public void setCategory_id(Long category_id) {
+        this.category_id = category_id;
+    }
+
     @ColumnName("FK_CATEGORIES")
     private Long category_id;
     private Category category;

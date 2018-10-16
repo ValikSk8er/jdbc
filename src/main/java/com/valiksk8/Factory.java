@@ -1,14 +1,16 @@
 package com.valiksk8;
 
-import com.valiksk8.controller.AdminAddUserController;
-import com.valiksk8.controller.AdminDeleteUserController;
-import com.valiksk8.controller.AdminProductsController;
-import com.valiksk8.controller.AdminRolesController;
-import com.valiksk8.controller.AdminUsersController;
+import com.valiksk8.controller.Admin.AdminAddProductController;
+import com.valiksk8.controller.Admin.AdminAddUserController;
+import com.valiksk8.controller.Admin.AdminDeleteProductController;
+import com.valiksk8.controller.Admin.AdminDeleteUserController;
+import com.valiksk8.controller.Admin.AdminProductsController;
+import com.valiksk8.controller.Admin.AdminRolesController;
+import com.valiksk8.controller.Admin.AdminUsersController;
 import com.valiksk8.controller.Controller;
-import com.valiksk8.controller.AdminAddCategoryContorller;
-import com.valiksk8.controller.AdminCategoriesController;
-import com.valiksk8.controller.AdminDeleteCategoryContorller;
+import com.valiksk8.controller.Admin.AdminAddCategoryContorller;
+import com.valiksk8.controller.Admin.AdminCategoriesController;
+import com.valiksk8.controller.Admin.AdminDeleteCategoryContorller;
 import com.valiksk8.controller.AllCategoriesController;
 import com.valiksk8.controller.CategoryByIdController;
 import com.valiksk8.controller.ProductByIdController;
@@ -119,5 +121,13 @@ public class Factory {
 
     public static Controller getAdminDeleteUserController() {
         return new AdminDeleteUserController(getUserService());
+    }
+
+    public static Controller getAdminAddProductController() {
+        return new AdminAddProductController(getProductService());
+    }
+
+    public static Controller getAdminDeleteProductController() {
+        return new AdminDeleteProductController(getProductService());
     }
 }

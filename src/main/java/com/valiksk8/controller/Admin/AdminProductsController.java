@@ -1,5 +1,6 @@
-package com.valiksk8.controller;
+package com.valiksk8.controller.Admin;
 
+import com.valiksk8.controller.Controller;
 import com.valiksk8.model.Product;
 import com.valiksk8.service.ProductService;
 import com.valiksk8.web.Request;

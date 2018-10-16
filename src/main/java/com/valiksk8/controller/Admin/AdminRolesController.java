@@ -1,5 +1,6 @@
-package com.valiksk8.controller;
+package com.valiksk8.controller.Admin;
 
+import com.valiksk8.controller.Controller;
 import com.valiksk8.model.Role;
 import com.valiksk8.web.Request;
 import com.valiksk8.web.ViewModel;
@@ -7,7 +8,7 @@ import com.valiksk8.web.ViewModel;
 import java.util.Arrays;
 import java.util.List;
 
-public class AdminRolesController implements Controller{
+public class AdminRolesController implements Controller {
 
     @Override
     public ViewModel process(Request request) {

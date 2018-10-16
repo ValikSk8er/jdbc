@@ -45,16 +45,6 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public boolean checkCategoryExist(String categoryName) {
-        return categoryDao.findByName(categoryName) != null ? true : false;
-    }
-
-    @Override
-    public boolean checkCategoryExist(Long id) {
-        return categoryDao.findById(id) != null ? true : false;
-    }
-
-    @Override
     public Category findWithProductById(Long id) {
         return categoryDao.findWithProductById(id);
     }

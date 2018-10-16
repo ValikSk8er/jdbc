@@ -9,7 +9,6 @@ import java.util.List;
 
 public class ProductServiceImpl implements ProductService {
 
-
     private final ProductDao productDao;
 
     public ProductServiceImpl (ProductDao productDao){

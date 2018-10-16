@@ -23,14 +23,14 @@
     <div class="row">
         <div class="col-md-6 mb-3">
             <label for="firstName">First name</label>
-            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First name" value="" required>
+            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First name" value="">
             <div class="invalid-feedback">
                 Valid first name is required.
             </div>
         </div>
         <div class="col-md-6 mb-3">
             <label for="lastName">Last name</label>
-            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last name" value="" required>
+            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last name" value="">
             <div class="invalid-feedback">
                 Valid last name is required.
             </div>

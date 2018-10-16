@@ -59,8 +59,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteById(Long id) {
-        userDao.clearRoleOnUserById(id);
         userDao.deleteById(id);
+    }
+
+    @Override
+    public void deleteByEmail(String email) {
+        User user = findByEmail(email);
+        Long id = user.getId();
+        clearRoleOnUserById(id);
+        deleteById(id);
+    }
+
+    @Override
+    public void clearRoleOnUserById(Long id) {
+        userDao.clearRoleOnUserById(id);
     }
 
     @Override
@@ -81,12 +93,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isRegistered(String email) {
-        return findByEmail(email) != null ? true : false;
-    }
-
-    @Override
-    public void clearRoleOnUserById(Long id) {
-        userDao.clearRoleOnUserById(id);
+        return findByEmail(email) != null;
     }
 
     private String getToken() {
