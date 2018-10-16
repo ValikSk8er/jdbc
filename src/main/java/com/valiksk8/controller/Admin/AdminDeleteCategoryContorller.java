@@ -52,7 +52,7 @@ public class AdminDeleteCategoryContorller implements Controller {
 
     private ViewModel processDeleteCategoryByName(String categoryName) {
         ViewModel vm = ViewModel.of("adminCategories");
-        boolean isNotExist =categoryService.findByName(categoryName) != null;
+        boolean isNotExist = categoryService.findByName(categoryName) == null;
 
         if (isNotExist) {
             vm.addAttribute("msg_delete_name", true);
