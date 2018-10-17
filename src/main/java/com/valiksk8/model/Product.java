@@ -18,12 +18,9 @@ public class Product {
     @ColumnName("DESCRIPTION")
     private String description;
 
-    public void setCategory_id(Long category_id) {
-        this.category_id = category_id;
-    }
-
     @ColumnName("FK_CATEGORIES")
-    private Long category_id;
+    private Long categoryId;
+
     private Category category;
 
     public Product() {
@@ -43,16 +40,20 @@ public class Product {
     public Product(String name, double price, String description, Category category) {
         this(name, price, description);
         this.category = category;
-        this.category_id = category.getId();
+        this.categoryId = category.getId();
     }
 
     public Category getCategory() {
         return category;
     }
 
-    public Long getCategory_id() {
-        return category_id;
+    public Long getCategoryId() {
+        return categoryId;
     }
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
+
 
     public void setCategory(Category category) {
         this.category = category;

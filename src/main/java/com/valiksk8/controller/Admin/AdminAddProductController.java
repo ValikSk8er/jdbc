@@ -44,7 +44,7 @@ public class AdminAddProductController implements Controller {
 
         Long categoryId = Long.parseLong(categoryIdString);
 
-        product.setCategory_id(categoryId);
+        product.setCategoryId(categoryId);
         productService.add(product);
     }
 }

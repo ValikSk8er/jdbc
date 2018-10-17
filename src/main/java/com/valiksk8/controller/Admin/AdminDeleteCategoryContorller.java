@@ -75,7 +75,7 @@ public class AdminDeleteCategoryContorller implements Controller {
     private void processClearCategoryIdInProducts(Long categoryId) {
         List<Product> products = productService.findAllWithCategoryId(categoryId);
         for (Product product : products) {
-            product.setCategory_id(null);
+            product.setCategoryId(null);
             Long productId = product.getId();
             productService.updateById(productId, product);
         }
