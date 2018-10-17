@@ -60,17 +60,4 @@ public class CategoryDaoImpl extends AbstractDao<Category> implements CategoryDa
         String query = QueryBuilder.getSelectByParamQuery(Category.class, "CATEGORY_NAME");
         return simpleConnectAndGetObjectByParam(query, name);
     }
-
-    @Override
-    public void deleteByName(String name) {
-        String query = QueryBuilder.getDeleteByParamQuery(Category.class, "CATEGORY_NAME");
-
-        try {
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, name);
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }

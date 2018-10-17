@@ -40,11 +40,6 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void deleteByName(String categoryName) {
-        categoryDao.deleteByName(categoryName);
-    }
-
-    @Override
     public Category findWithProductById(Long id) {
         return categoryDao.findWithProductById(id);
     }

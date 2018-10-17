@@ -96,7 +96,7 @@ public class Factory {
     }
 
     public static Controller getAdminDeleteCategoryContorller() {
-        return new AdminDeleteCategoryContorller(getCategoryService());
+        return new AdminDeleteCategoryContorller(getCategoryService(), getProductService());
     }
 
     public static Controller getAdminCategoriesContorller() {

@@ -39,14 +39,17 @@ public class QueryBuilder {
 
         Field[] fields = clazz.getDeclaredFields();
 
-        for (Field field : fields) {
-            values.append(field.getName())
-                    .append(queryValueSign)
-                    .append(SEPARATOR);
-        }
 
-        values.substring(0, values.length() - SEPARATOR.length());
-        return String.format("UPDATE %s SET %s WHERE ID = %d;", tableName, values, id);
+        for (Field field : fields) {
+            String columnName = ClassMetaData.getColumnNameFromField(field);
+            if (columnName != null) {
+                values.append(columnName)
+                        .append(queryValueSign)
+                        .append(SEPARATOR);
+            }
+        }
+        String query = values.substring(0, values.length() - SEPARATOR.length());
+        return String.format("UPDATE %s SET %s WHERE ID = %d;", tableName, query, id);
     }
 
     private static String getFieldsNames(Field[] fields) {

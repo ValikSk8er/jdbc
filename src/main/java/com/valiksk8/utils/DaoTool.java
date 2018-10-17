@@ -48,6 +48,7 @@ public class DaoTool {
 
     public static  <T> PreparedStatement createPrepareStatement(Connection connection, Class<?> clazz, String query, T entity) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(query);
+        boolean isUpdateQuery = query.contains("UPDATE");
         Field[] fields = clazz.getDeclaredFields();
         int paramIndex = 1;
         for (int i = 0; i < fields.length; i++) {
@@ -60,7 +61,7 @@ public class DaoTool {
                 e.printStackTrace();
             }
             try {
-                if (value != null) {
+                if (isUpdateQuery || value != null) {
                     statement.setObject(paramIndex++, value);
                 }
             } catch (SQLException e) {

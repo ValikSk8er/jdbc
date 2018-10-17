@@ -10,5 +10,4 @@ public interface CategoryDao extends Dao<Category>{
     List<Category> findAll();
     Category findWithProductById(Long id);
     Category findByName(String name);
-    void deleteByName(String name);
 }
