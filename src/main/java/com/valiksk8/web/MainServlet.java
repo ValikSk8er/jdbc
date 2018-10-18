@@ -27,10 +27,10 @@ public class MainServlet extends HttpServlet {
         controllerMap.put(Request.of("GET", "/servlet/product"), Factory.getProductByIdController());
         controllerMap.put(Request.of("GET", "/servlet/logout"), Factory.getLogoutController());
         controllerMap.put(Request.of("GET", "/servlet/admin"), r -> ViewModel.of("adminPage"));
-        controllerMap.put(Request.of("GET", "/servlet/adminCategories"), Factory.getAdminCategoriesContorller());
-        controllerMap.put(Request.of("GET", "/servlet/adminProducts"), Factory.getAdminProductsController());
-        controllerMap.put(Request.of("GET", "/servlet/adminUsers"), Factory.getAdminUsersController());
-        controllerMap.put(Request.of("GET", "/servlet/adminRoles"), Factory.getAdminRolesController());
+        controllerMap.put(Request.of("GET", "/servlet/admin/categories"), Factory.getAdminCategoriesContorller());
+        controllerMap.put(Request.of("GET", "/servlet/admin/products"), Factory.getAdminProductsController());
+        controllerMap.put(Request.of("GET", "/servlet/admin/users"), Factory.getAdminUsersController());
+        controllerMap.put(Request.of("GET", "/servlet/admin/roles"), Factory.getAdminRolesController());
         controllerMap.put(Request.of("POST", "/servlet/login"), Factory.getLoginPageController());
         controllerMap.put(Request.of("POST", "/servlet/register"), Factory.getRegisterController());
         controllerMap.put(Request.of("POST", "/servlet/addCategory"), Factory.getAdminAddCategoryContorller());

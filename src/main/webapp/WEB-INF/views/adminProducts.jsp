@@ -66,7 +66,7 @@
                 <td><c:out value="${p.name}"/></td>
                 <td><c:out value="${p.description}"/></td>
                 <td><c:out value="${p.price}"/></td>
-                <td><c:out value="${p.category_id}"/></td>
+                <td><c:out value="${p.categoryId}"/></td>
             </tr>
         </c:forEach>
         </tbody>
