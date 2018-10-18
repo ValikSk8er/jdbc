@@ -73,7 +73,7 @@
 
 <div class="col-md-4">
     <table class="table table-striped table-sm">
-        <thead>
+        <thead align="center">
         <tr>
             <th>Id</th>
             <th>Email</th>

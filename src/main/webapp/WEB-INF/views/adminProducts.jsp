@@ -61,9 +61,9 @@
 
 </div>
 
-<div class="col-md-4">
+<div class="col-md-6">
     <table class="table table-striped table-sm">
-        <thead>
+        <thead align="center">
         <tr>
             <th>Id</th>
             <th>Name</th>

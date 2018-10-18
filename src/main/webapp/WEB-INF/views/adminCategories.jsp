@@ -51,7 +51,7 @@
 </div>
 <div class="">
     <table class="table table-striped table-sm">
-        <thead>
+        <thead align="center">
         <tr>
             <th>Id</th>
             <th>Category name</th>
