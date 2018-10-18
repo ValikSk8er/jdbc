@@ -1,12 +1,13 @@
 <%@include file="header.jsp" %>
 <%@include file="adminLeftMenu.jsp" %>
-
 <div>
-    <h2>Admin page</h2>
-    <h4>Choose a category</h4>
+<section class="jumbotron text-center">
+    <div class="container">
+        <h2 class="jumbotron-heading">Admin page</h2>
+        <p class="lead text-muted">Choose necessary category</p>
+    </div>
+</section>
 </div>
-
-
 
 
 </body>

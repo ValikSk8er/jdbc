@@ -47,23 +47,33 @@
 </div>
 </div>
 <div class="col-md-4">
-    <div class="col-md-4">
+    <div>
         <h5 class="mb-3">Roles</h5>
 
         <table class="table table-striped table-sm">
             <thead>
             <tr>
                 <th>Role name</th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach var = "r" items="${roles}">
                 <tr>
                     <td><c:out value="${r}"/></td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Remove</button>
+                        </div>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
+        <div>
+            <button class="btn btn-primary btn-block" type="submit">Add</button>
+        </div>
     </div>
 </div>
 </body>

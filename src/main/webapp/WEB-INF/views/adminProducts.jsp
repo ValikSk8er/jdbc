@@ -45,6 +45,19 @@
         </c:if>
         <button class="btn btn-primary btn-block" type="submit">Add new product</button>
     </form>
+    <form class="form-deleteProduct" action="<c:url value="/servlet/deleteProduct"/>" method="post">
+        <h5 class="mb-3">Delete by id</h5>
+
+        <c:if test="${msg_delete_error}">
+            <p style="color:red">Product id not exist</p>
+        </c:if>
+        <c:if test="${msg_delete_success}">
+            <p style="color:green">The product was deleted</p>
+        </c:if>
+        <label for="inputProductId" class="sr-only">Product id:</label>
+        <input name="productId" type="number" id="inputProductId" class="form-control" placeholder="Product id" required autofocus>
+        <button class="btn btn-secondary btn-block" type="submit">Delete product</button>
+    </form>
 
 </div>
 
@@ -57,6 +70,7 @@
             <th>Description</th>
             <th>Price</th>
             <th>Category Id</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -67,24 +81,19 @@
                 <td><c:out value="${p.description}"/></td>
                 <td><c:out value="${p.price}"/></td>
                 <td><c:out value="${p.categoryId}"/></td>
+                <td><div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Remove</button>
+                </div>
+                </td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
-    <form class="form-deleteProduct" action="<c:url value="/servlet/deleteProduct"/>" method="post">
-        <h4 class="mb-3">Delete by id</h4>
+    <div>
+        <button class="btn btn-primary btn-block" type="submit">Add</button>
+    </div>
 
-        <c:if test="${msg_delete_error}">
-            <p style="color:red">Product id not exist</p>
-        </c:if>
-        <c:if test="${msg_delete_success}">
-            <p style="color:green">The product was deleted</p>
-        </c:if>
-        <label for="inputProductId" class="sr-only">Product id:</label>
-        <input name="productId" type="number" id="inputProductId" class="form-control" placeholder="Product id" required autofocus>
-
-        <button class="btn btn-secondary btn-block" type="submit">Delete product</button>
-    </form>
 </div>
 </body>
 </html>
