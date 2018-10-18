@@ -20,26 +20,30 @@
         </div>
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="firstName">First name</label>
+                <label for="firstName">First name<span class="text-muted"> (Optional)</span></label>
                 <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First name" value="">
                 <div class="invalid-feedback">
                     Valid first name is required.
                 </div>
             </div>
             <div class="col-md-6 mb-3">
-                <label for="lastName">Last name</label>
+                <label for="lastName">Last name<span class="text-muted"> (Optional)</span></label>
                 <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last name" value="">
                 <div class="invalid-feedback">
                     Valid last name is required.
                 </div>
             </div>
         </div>
-        <h5 class="mb-3">Roles</h5>
         <div class="d-block my-3">
+            <h6 class="mb-3">Role</h6>
             <c:forEach var = "r" items="${roles}">
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" name="<c:out value="${r}"/>" id="role">
-                    <label class="custom-control-label" for="role"><c:out value="${r}"/></label>
+                    <input type="checkbox" class="custom-control-input" name="${r}" id="${r}"
+                    <c:if test="${r == 'USER'}">
+                        checked required disabled
+                    </c:if>
+                    >
+                    <label class="custom-control-label" for="${r}"><c:out value="${r}"/></label>
                 </div>
             </c:forEach>
         </div>
@@ -75,6 +79,7 @@
             <th>Email</th>
             <th>First Name</th>
             <th>Last Name</th>
+            <th>Roles</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -85,6 +90,10 @@
                 <td><c:out value="${u.email}"/></td>
                 <td><c:out value="${u.firstName}"/></td>
                 <td><c:out value="${u.lastName}"/></td>
+                <td>
+                    <c:forEach items="${u.roles}" var = "r">
+                        <div class="col-md-4"><c:out value="${r.roleName}"/></div>
+                    </c:forEach>
                 <td>
                     <div class="btn-group">
                         <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>

@@ -7,6 +7,7 @@ import com.valiksk8.model.User;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -29,7 +30,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAll() {
-        return userDao.findAll();
+        List<User> users = userDao.findAll();
+        List<User> result = new ArrayList<>();
+
+        for (User user : users) {
+            String token = user.getToken();
+            user = userDao.findByToken(token);
+            result.add(user);
+        }
+        return result;
     }
 
     @Override

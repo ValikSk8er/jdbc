@@ -46,7 +46,7 @@
     </div>
 </div>
 </div>
-<div class="col-md-4">
+<div class="">
     <div>
         <h5 class="mb-3">Roles</h5>
 

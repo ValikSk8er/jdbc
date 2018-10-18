@@ -49,7 +49,7 @@
         <button class="btn btn-secondary btn-block" type="submit">Delete</button>
     </form>
 </div>
-<div class="col-md-4">
+<div class="">
     <table class="table table-striped table-sm">
         <thead>
         <tr>

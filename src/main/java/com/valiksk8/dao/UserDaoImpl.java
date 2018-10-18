@@ -9,13 +9,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     public UserDaoImpl(Connection connection) {
         super(connection);
     }
-
 
     @Override
     public User addUser(User user) {
@@ -81,7 +82,6 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return user;
     }
 

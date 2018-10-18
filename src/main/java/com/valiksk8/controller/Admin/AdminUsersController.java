@@ -23,6 +23,7 @@ public class AdminUsersController implements Controller {
         List<Role.RoleName> roles = Arrays.asList(Role.RoleName.values());
         List<User> users = userService.findAll();
 
+
         vm.addAttribute("roles", roles);
         vm.addAttribute("users", users);
         return vm;
