@@ -1,4 +1,4 @@
-package com.valiksk8.web;
+package com.valiksk8.web.filters;
 
 import com.valiksk8.dao.UserDao;
 import com.valiksk8.model.Role;
@@ -58,23 +58,28 @@ public class UserFilter implements Filter {
             if(c.getName().equals(COOKIE_NAME)) {
                 token = c.getValue();
             }
+        }
 
-            if(token == null) {
+        if(token == null) {
+            processUnauthenticated(request, response);
+        } else {
+            user = userDao.findByToken(token);
+            if (user == null) {
                 processUnauthenticated(request, response);
             } else {
-                user = userDao.findByToken(token);
-                if (user == null) {
-                    processUnauthenticated(request, response);
+                setUser(req, user);
+                if (varifyRole(user, roleName)) {
+                    req.setAttribute("user", user);
+                    processAuthenteticated(request, response, chain);
                 } else {
-                    if (varifyRole(user, roleName)) {
-                        req.setAttribute("user", user);
-                        processAuthenteticated(request, response, chain);
-                    } else {
-                        processAccessDenied(request, response);
-                    }
+                    processAccessDenied(request, response);
                 }
             }
         }
+    }
+
+    private void setUser(HttpServletRequest req, User user) {
+        req.setAttribute("user", user);
     }
 
     private void processAccessDenied(ServletRequest request, ServletResponse response) throws ServletException, IOException {
