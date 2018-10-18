@@ -29,7 +29,7 @@
         </c:if>
         <label for="inputCategoryId" class="sr-only">Category id:</label>
 
-        <input name="categoryId" type="number" id="inputCategoryId" class="form-control" placeholder="id" required autofocus>
+        <input name="categoryId" type="number" id="inputCategoryId" class="form-control" placeholder="Category id" required autofocus>
 
         <button class="btn btn-secondary btn-block" type="submit">Delete</button>
     </form>
@@ -44,7 +44,7 @@
         </c:if>
         <label for="inputCategory" class="sr-only">Category name:</label>
 
-        <input name="categoryName" type="text" id="inputCategory" class="form-control" placeholder="name" required autofocus>
+        <input name="categoryName" type="text" id="inputCategory" class="form-control" placeholder="Category name" required autofocus>
 
         <button class="btn btn-secondary btn-block" type="submit">Delete</button>
     </form>
