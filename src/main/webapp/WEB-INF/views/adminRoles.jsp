@@ -19,7 +19,7 @@
             </form>
         </div>
         <div class="col-md-5">
-            <form class="form-addRole" action="<c:url value="/servlet/deleteRole"/>" method="post">
+            <form class="form-delRole" action="<c:url value="/servlet/deleteRole"/>" method="get">
                 <div class="mb-3">
                     <h4 class="mb-3 font-weight-normal">Delete role</h4>
                     <c:if test="${msg_delete_error}">
@@ -29,7 +29,7 @@
                         <p style="color:green">The role was deleted</p>
                     </c:if>
                     <label for="inputRole" class="sr-only">Role name:</label>
-                    <input name="name" type="text" id="inputRole" class="form-control" placeholder="Role name" required autofocus>
+                    <input name="r_name" type="text" id="inputRole" class="form-control" placeholder="Role name" required autofocus>
                     <button class="btn btn-secondary btn-block" type="submit">Delete role</button>
                 </div>
             </form>
@@ -53,7 +53,7 @@
                     <td>
                         <div class="btn-group">
                             <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Remove</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
                         </div>
                     </td>
                 </tr>

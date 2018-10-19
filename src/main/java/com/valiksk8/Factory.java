@@ -130,4 +130,8 @@ public class Factory {
     public static Controller getAdminDeleteProductController() {
         return new AdminDeleteProductController(getProductService());
     }
+
+    public static Controller getAdminDeleteRoleController() {
+        return null;
+    }
 }

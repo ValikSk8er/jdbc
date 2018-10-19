@@ -33,21 +33,21 @@
 
         <button class="btn btn-secondary btn-block" type="submit">Delete</button>
     </form>
-    <form class="form-deleteCategoryByName" action="<c:url value="/servlet/deleteCategory"/>" method="post">
-        <h5 class="mb-3 font-weight-normal">Delete by name</h5>
+    <%--<form class="form-deleteCategoryByName" action="<c:url value="/servlet/deleteCategory"/>" method="post">--%>
+        <%--<h5 class="mb-3 font-weight-normal">Delete by name</h5>--%>
 
-        <c:if test="${msg_delete_name}">
-            <p style="color:red">The category name not exist</p>
-        </c:if>
-        <c:if test="${msg_delete_name_success}">
-            <p style="color:green">The category was deleted</p>
-        </c:if>
-        <label for="inputCategory" class="sr-only">Category name:</label>
+        <%--<c:if test="${msg_delete_name}">--%>
+            <%--<p style="color:red">The category name not exist</p>--%>
+        <%--</c:if>--%>
+        <%--<c:if test="${msg_delete_name_success}">--%>
+            <%--<p style="color:green">The category was deleted</p>--%>
+        <%--</c:if>--%>
+        <%--<label for="inputCategory" class="sr-only">Category name:</label>--%>
 
-        <input name="categoryName" type="text" id="inputCategory" class="form-control" placeholder="Category name" required autofocus>
+        <%--<input name="categoryName" type="text" id="inputCategory" class="form-control" placeholder="Category name" required autofocus>--%>
 
-        <button class="btn btn-secondary btn-block" type="submit">Delete</button>
-    </form>
+        <%--<button class="btn btn-secondary btn-block" type="submit">Delete</button>--%>
+    <%--</form>--%>
 </div>
 <div class="">
     <table class="table table-striped table-sm">
@@ -64,8 +64,8 @@
                 <td><c:out value="${c.id}"/></td>
                 <td><c:out value="${c.name}"/></td>
                 <td><div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Remove</button>
+                    <a type="button" class="btn btn-sm btn-outline-secondary" href="/servlet/admin/edit-category?c_id=${c.id}">Edit</a>
+                    <a type="button" class="btn btn-sm btn-outline-secondary" href="/servlet/admin/delete-category?c_id=${c.id}">Delete</a>
                 </div>
                 </td>
             </tr>
