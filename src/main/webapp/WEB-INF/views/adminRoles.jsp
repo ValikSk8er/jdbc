@@ -50,7 +50,7 @@
             <c:forEach var = "r" items="${roles}">
                 <tr>
                     <td><c:out value="${r}"/></td>
-                    <td>
+                    <td align="center">
                         <div class="btn-group">
                             <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                             <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>

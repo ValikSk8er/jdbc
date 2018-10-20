@@ -23,52 +23,21 @@ public class AdminDeleteCategoryContorller implements Controller {
     @Override
     public ViewModel process(Request request) {
         ViewModel vm;
-        String categoryName = request.getParamByName("categoryName");
-        String categoryId = request.getParamByName("categoryId");
+        String categoryId = request.getParamByName("c_id");
 
-        if (categoryName == null) {
-            if (categoryId == null) {
-                return null;
-            }
-            vm = processDeleteCategoryById(categoryId);
-        } else {
-            vm = processDeleteCategoryByName(categoryName);
-        }
+        Long id = Long.parseLong(categoryId);
+        vm = processDeleteCategoryById(id);
 
         List<Category> categories = categoryService.findAll();
         vm.addAttribute("categories", categories);
         return vm;
     }
 
-    private ViewModel processDeleteCategoryById(String categoryId) {
+    private ViewModel processDeleteCategoryById(Long id) {
         ViewModel vm = ViewModel.of("adminCategories");
-        Long id = Long.parseLong(categoryId);
-        boolean isNotExist = categoryService.findById(id) == null;
-
-        if (isNotExist) {
-            vm.addAttribute("msg_delete_id", true);
-        } else {
-            processClearCategoryIdInProducts(id);
-            categoryService.deleteById(id);
-            vm.addAttribute("msg_delete_id_success", true);
-        }
-        return vm;
-    }
-
-    private ViewModel processDeleteCategoryByName(String categoryName) {
-        ViewModel vm = ViewModel.of("adminCategories");
-        Category category = categoryService.findByName(categoryName);
-        boolean isNotExist = category == null;
-
-
-        if (isNotExist) {
-            vm.addAttribute("msg_delete_name", true);
-        } else {
-            Long id = category.getId();
-            processClearCategoryIdInProducts(id);
-            categoryService.deleteById(id);
-            vm.addAttribute("msg_delete_name_success", true);
-        }
+        processClearCategoryIdInProducts(id);
+        categoryService.deleteById(id);
+        vm.addAttribute("msg_del", true);
         return vm;
     }
 

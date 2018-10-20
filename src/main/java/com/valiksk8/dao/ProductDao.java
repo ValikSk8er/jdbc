@@ -7,5 +7,5 @@ import java.util.List;
 public interface ProductDao extends Dao<Product>{
 
     Product findByName(String name);
-    List<Product> findAllWithCategoryId(Long id);
+    List<Product> findAllByCategoryId(Long id);
 }

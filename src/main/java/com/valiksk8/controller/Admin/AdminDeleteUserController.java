@@ -20,15 +20,11 @@ public class AdminDeleteUserController implements Controller {
     @Override
     public ViewModel process(Request request) {
         ViewModel vm = ViewModel.of("adminUsers");
-        String email = request.getParamByName("email");
+        String userId = request.getParamByName("u_id");
+        Long id = Long.parseLong(userId);
+        userService.deleteById(id);
+        vm.addAttribute("msg_delete_success", true);
 
-        boolean isNotExist = !userService.isRegistered(email);
-        if (isNotExist) {
-            vm.addAttribute("msg_delete_error", true);
-        } else {
-            userService.deleteByEmail(email);
-            vm.addAttribute("msg_delete_success", true);
-        }
         List<Role.RoleName> roleNames = Arrays.asList(Role.RoleName.values());
         List<User> users = userService.findAll();
         vm.addAttribute("roles", roleNames);

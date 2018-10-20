@@ -18,17 +18,14 @@ public class AdminDeleteProductController implements Controller {
     @Override
     public ViewModel process(Request request) {
         ViewModel vm = ViewModel.of("adminProducts");
-        String productIdString = request.getParamByName("productId");
-        Long productId = Long.parseLong(productIdString);
+        String productId = request.getParamByName("p_id");
+        Long id = Long.parseLong(productId);
 
-        boolean isNotExist = productService.findById(productId) == null;
-        if (isNotExist) {
-            vm.addAttribute("msg_delete_error", true);
-        } else {
-            productService.deleteById(productId);
-            vm.addAttribute("msg_delete_success", true);
-        }
+        productService.deleteById(id);
+        vm.addAttribute("msg_del", true);
+
         List<Product> products = productService.findAll();
         vm.addAttribute("products", products);
-        return vm;    }
+        return vm;
+    }
 }

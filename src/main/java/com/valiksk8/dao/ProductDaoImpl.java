@@ -1,5 +1,6 @@
 package com.valiksk8.dao;
 
+import com.valiksk8.model.Category;
 import com.valiksk8.model.Product;
 import com.valiksk8.utils.QueryBuilder;
 
@@ -22,7 +23,7 @@ public class ProductDaoImpl extends AbstractDao<Product> implements ProductDao {
     }
 
     @Override
-    public List<Product> findAllWithCategoryId(Long id) {
+    public List<Product> findAllByCategoryId(Long id) {
         String query = QueryBuilder.getSelectByParamQuery(Product.class, "FK_CATEGORIES");
         List<Product> result = new ArrayList<>();
         PreparedStatement statement;
@@ -39,5 +40,36 @@ public class ProductDaoImpl extends AbstractDao<Product> implements ProductDao {
             e.printStackTrace();
         }
         return result;
+    }
+
+    @Override
+    public List<Product> findAll() {
+        String query = "SELECT P.ID, P.NAME, P.PRICE, P.DESCRIPTION, C.CATEGORY_NAME FROM PRODUCTS P " +
+                "JOIN CATEGORIES C ON P.FK_CATEGORIES = C.ID";
+        List<Product> result = new ArrayList<>();
+        Statement statement;
+        ResultSet resultSet;
+
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                result.add(getProductFromResultSet(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    private Product getProductFromResultSet(ResultSet resultSet) throws SQLException {
+        Category category = new Category(resultSet.getString(5));
+        return new Product(
+                resultSet.getLong(1),
+                resultSet.getString(2),
+                resultSet.getDouble(3),
+                resultSet.getString(4),
+                category
+        );
     }
 }

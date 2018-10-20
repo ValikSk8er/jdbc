@@ -1,7 +1,9 @@
 package com.valiksk8.controller.Admin;
 
 import com.valiksk8.controller.Controller;
+import com.valiksk8.model.Category;
 import com.valiksk8.model.Product;
+import com.valiksk8.service.CategoryService;
 import com.valiksk8.service.ProductService;
 import com.valiksk8.web.Request;
 import com.valiksk8.web.ViewModel;
@@ -11,9 +13,12 @@ import java.util.List;
 public class AdminAddProductController implements Controller {
 
     private final ProductService productService;
+    private final CategoryService categoryService;
 
-    public AdminAddProductController(ProductService productService) {
+
+    public AdminAddProductController(ProductService productService, CategoryService categoryService) {
         this.productService = productService;
+        this.categoryService = categoryService;
     }
 
     @Override
@@ -40,11 +45,11 @@ public class AdminAddProductController implements Controller {
         String categoryIdString = request.getParamByName("categoryId");
         double price = Double.parseDouble(priceString);
 
-        Product product = new Product(name, price, description);
-
         Long categoryId = Long.parseLong(categoryIdString);
 
-        product.setCategoryId(categoryId);
+        Category category = categoryService.findById(categoryId);
+        Product product = new Product(name, price, description, category);
+
         productService.add(product);
     }
 }

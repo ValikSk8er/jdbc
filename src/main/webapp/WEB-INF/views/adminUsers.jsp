@@ -55,27 +55,12 @@
         </c:if>
         <button class="btn btn-primary btn-block" type="submit">Add new user</button>
     </form>
-    <form class="form-deleteUser" action="<c:url value="/servlet/deleteUser"/>" method="post">
-        <h4 class="mb-3">Delete by email</h4>
-
-        <c:if test="${msg_delete_error}">
-            <p style="color:red">Email not exist</p>
-        </c:if>
-        <c:if test="${msg_delete_success}">
-            <p style="color:green">The user was deleted</p>
-        </c:if>
-        <label for="inputUserEmail" class="sr-only">User email:</label>
-        <input name="email" type="email" id="inputUserEmail" class="form-control" placeholder="User email" required autofocus>
-
-        <button class="btn btn-secondary btn-block" type="submit">Delete user</button>
-    </form>
 </div>
 
 <div class="col-md-4">
     <table class="table table-striped table-sm">
         <thead align="center">
         <tr>
-            <th>Id</th>
             <th>Email</th>
             <th>First Name</th>
             <th>Last Name</th>
@@ -86,7 +71,6 @@
         <tbody>
         <c:forEach var = "u" items="${users}">
             <tr>
-                <td><c:out value="${u.id}"/></td>
                 <td><c:out value="${u.email}"/></td>
                 <td><c:out value="${u.firstName}"/></td>
                 <td><c:out value="${u.lastName}"/></td>
@@ -94,10 +78,10 @@
                     <c:forEach items="${u.roles}" var = "r">
                         <div class="col-md-4"><c:out value="${r.roleName}"/></div>
                     </c:forEach>
-                <td>
+                <td align="center">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Remove</button>
+                        <a type="button" class="btn btn-sm btn-outline-secondary" href="/servlet/admin/edit-user?u_id=${u.id}">Edit</a>
+                        <a type="button" class="btn btn-sm btn-outline-secondary" href="/servlet/admin/delete-user?u_id=${u.id}">Delete</a>
                     </div>
                 </td>
             </tr>
@@ -105,7 +89,9 @@
         </tbody>
     </table>
     <div>
-        <button class="btn btn-primary btn-block" type="submit">Add</button>
+        <c:if test="${msg_delete_success}">
+            <p style="color:green">The user was deleted</p>
+        </c:if>
     </div>
 </div>
 </body>

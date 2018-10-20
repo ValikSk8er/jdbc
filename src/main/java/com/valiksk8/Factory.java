@@ -116,7 +116,7 @@ public class Factory {
     }
 
     public static Controller getAdminProductsController() {
-        return new AdminProductsController(getProductService());
+        return new AdminProductsController(getProductService(), getCategoryService());
     }
 
     public static Controller getAdminDeleteUserController() {
@@ -124,7 +124,7 @@ public class Factory {
     }
 
     public static Controller getAdminAddProductController() {
-        return new AdminAddProductController(getProductService());
+        return new AdminAddProductController(getProductService(), getCategoryService());
     }
 
     public static Controller getAdminDeleteProductController() {

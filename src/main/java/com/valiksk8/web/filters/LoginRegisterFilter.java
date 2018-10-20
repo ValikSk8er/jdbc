@@ -38,11 +38,18 @@ public class LoginRegisterFilter implements Filter {
         String token = null;
         User user = null;
 
+
+        if (cookies == null) {
+            chain.doFilter(request, response);
+            return;
+        }
+
         for(Cookie c : cookies) {
             if(c.getName().equals(COOKIE_NAME)) {
                 token = c.getValue();
             }
         }
+
         if (token != null) {
             user = userDao.findByToken(token);
         }

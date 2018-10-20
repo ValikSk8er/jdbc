@@ -43,6 +43,13 @@ public class Product {
         this.categoryId = category.getId();
     }
 
+
+    public Product(Long id, String name, double price, String description, Category category) {
+        this(id, name, price, description);
+        this.category = category;
+        this.categoryId = category.getId();
+    }
+
     public Category getCategory() {
         return category;
     }
