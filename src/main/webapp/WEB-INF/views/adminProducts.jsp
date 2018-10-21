@@ -2,7 +2,7 @@
 <%@include file="adminLeftMenu.jsp" %>
 
 <div class="col-md-4">
-    <form class="form-addProduct" action="<c:url value="/servlet/addProduct"/>" method="post">
+    <form class="form-addProduct" action="<c:url value="/servlet/add-product"/>" method="post">
 
         <h4 class="mb-3">Add product</h4>
 
@@ -73,7 +73,7 @@
         </c:forEach>
         </tbody>
     </table>
-    <div class="col-md-4">
+    <div>
         <c:if test="${msg_del}">
             <h5 style="color:red">The product was deleted</h5>
         </c:if>

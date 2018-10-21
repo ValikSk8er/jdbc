@@ -2,7 +2,7 @@
 <%@include file="adminLeftMenu.jsp" %>
 
 <div class="col-md-4">
-    <form class="form-addUser" action="<c:url value="/servlet/addUser"/>" method="post">
+    <form class="form-addUser" action="<c:url value="/servlet/add-user"/>" method="post">
         <h4 class="mb-3">Add user</h4>
         <div class="mb-3">
             <label for="email">Email</label>
@@ -90,7 +90,7 @@
     </table>
     <div>
         <c:if test="${msg_delete_success}">
-            <p style="color:green">The user was deleted</p>
+            <h5 style="color:red">The user was deleted</h5>
         </c:if>
     </div>
 </div>

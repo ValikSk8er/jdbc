@@ -68,20 +68,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteById(Long id) {
-        userDao.deleteById(id);
-    }
-
-    @Override
-    public void deleteByEmail(String email) {
-        User user = findByEmail(email);
-        Long id = user.getId();
-        clearRoleOnUserById(id);
-        deleteById(id);
-    }
-
-    @Override
-    public void clearRoleOnUserById(Long id) {
         userDao.clearRoleOnUserById(id);
+        userDao.deleteById(id);
     }
 
     @Override

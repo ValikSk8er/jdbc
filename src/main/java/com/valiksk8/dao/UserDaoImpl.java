@@ -1,5 +1,6 @@
 package com.valiksk8.dao;
 
+import com.valiksk8.model.Product;
 import com.valiksk8.model.Role;
 import com.valiksk8.model.User;
 import com.valiksk8.utils.QueryBuilder;
@@ -87,7 +88,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     private User getUserWIthRolesFromResultSet(ResultSet resultSet) throws SQLException {
         User user = getObjectFromResultSet(resultSet);
-        while (!resultSet.isAfterLast()){
+        while (!resultSet.isAfterLast() && resultSet.getLong(1) == user.getId()){
             Role role = Role.of(resultSet.getString(7));
             user.addRole(role);
             resultSet.next();

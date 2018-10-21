@@ -23,7 +23,7 @@ public class AdminAddCategoryContorller implements Controller {
         boolean isExist = categoryService.findByName(categoryName) != null;
 
         if (isExist) {
-            vm.addAttribute("msg_add", true);
+            vm.addAttribute("msg_add_error", true);
         } else {
             categoryService.addByName(categoryName);
             vm.addAttribute("msg_add_success", true);

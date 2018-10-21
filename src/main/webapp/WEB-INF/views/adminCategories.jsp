@@ -24,7 +24,7 @@
         </c:forEach>
         </tbody>
     </table>
-    <form class="form-addCategory" action="<c:url value="/servlet/addCategory"/>" method="post">
+    <form class="form-addCategory" action="<c:url value="/servlet/add-category"/>" method="post">
         <h5 class="mb-3 font-weight-normal">Add category</h5>
         <label for="inputCategory" class="sr-only">Category name:</label>
         <input name="categoryName" type="text" id="inputCategory" class="form-control" placeholder="Category name" required autofocus>
@@ -35,7 +35,7 @@
     <c:if test="${msg_del}">
         <h5 style="color:red">The category was deleted</h5>
     </c:if>
-    <c:if test="${msg_add}">
+    <c:if test="${msg_add_error}">
         <h5 style="color:red">The category already exist</h5>
     </c:if>
     <c:if test="${msg_add_success}">

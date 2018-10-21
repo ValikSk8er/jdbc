@@ -30,16 +30,14 @@ public class MainServlet extends HttpServlet {
         controllerMap.put(Request.of("GET", "/servlet/admin/categories"), Factory.getAdminCategoriesContorller());
         controllerMap.put(Request.of("GET", "/servlet/admin/products"), Factory.getAdminProductsController());
         controllerMap.put(Request.of("GET", "/servlet/admin/users"), Factory.getAdminUsersController());
-        controllerMap.put(Request.of("GET", "/servlet/admin/roles"), Factory.getAdminRolesController());
         controllerMap.put(Request.of("POST", "/servlet/login"), Factory.getLoginPageController());
         controllerMap.put(Request.of("POST", "/servlet/register"), Factory.getRegisterController());
-        controllerMap.put(Request.of("POST", "/servlet/addCategory"), Factory.getAdminAddCategoryContorller());
+        controllerMap.put(Request.of("POST", "/servlet/add-category"), Factory.getAdminAddCategoryContorller());
         controllerMap.put(Request.of("GET", "/servlet/admin/delete-category"), Factory.getAdminDeleteCategoryContorller());
-        controllerMap.put(Request.of("POST", "/servlet/addUser"), Factory.getAdminAddUserController());
+        controllerMap.put(Request.of("POST", "/servlet/add-user"), Factory.getAdminAddUserController());
         controllerMap.put(Request.of("GET", "/servlet/admin/delete-user"), Factory.getAdminDeleteUserController());
-        controllerMap.put(Request.of("POST", "/servlet/addProduct"), Factory.getAdminAddProductController());
+        controllerMap.put(Request.of("POST", "/servlet/add-product"), Factory.getAdminAddProductController());
         controllerMap.put(Request.of("GET", "/servlet/admin/delete-product"), Factory.getAdminDeleteProductController());
-        controllerMap.put(Request.of("GET", "/servlet/deleteRole"), Factory.getAdminDeleteRoleController());
     }
 
     @Override

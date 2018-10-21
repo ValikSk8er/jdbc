@@ -5,7 +5,6 @@ import com.valiksk8.controller.Admin.AdminAddUserController;
 import com.valiksk8.controller.Admin.AdminDeleteProductController;
 import com.valiksk8.controller.Admin.AdminDeleteUserController;
 import com.valiksk8.controller.Admin.AdminProductsController;
-import com.valiksk8.controller.Admin.AdminRolesController;
 import com.valiksk8.controller.Admin.AdminUsersController;
 import com.valiksk8.controller.Controller;
 import com.valiksk8.controller.Admin.AdminAddCategoryContorller;
@@ -50,14 +49,14 @@ public class Factory {
     public static PageNotFoundController getPageNotFoundController() { return new PageNotFoundController(); }
 
     public static UserDaoImpl getUserDao() {
-        return new UserDaoImpl(connection);
+        return new UserDaoImpl(getConnection());
     }
 
     public static ProductDaoImpl getProductDao() {
-        return new ProductDaoImpl(connection);
+        return new ProductDaoImpl(getConnection());
     }
 
-    public static CategoryDaoImpl getCategoryDao() { return new CategoryDaoImpl(connection); }
+    public static CategoryDaoImpl getCategoryDao() { return new CategoryDaoImpl(getConnection()); }
 
     public static UserServiceImpl getUserService() {
         return new UserServiceImpl(getUserDao());
@@ -111,9 +110,6 @@ public class Factory {
         return new AdminAddUserController(getUserService());
     }
 
-    public static Controller getAdminRolesController() {
-        return new AdminRolesController();
-    }
 
     public static Controller getAdminProductsController() {
         return new AdminProductsController(getProductService(), getCategoryService());
@@ -129,9 +125,5 @@ public class Factory {
 
     public static Controller getAdminDeleteProductController() {
         return new AdminDeleteProductController(getProductService());
-    }
-
-    public static Controller getAdminDeleteRoleController() {
-        return null;
     }
 }
