@@ -40,14 +40,14 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
             ResultSet rs = userStatement.getGeneratedKeys();
             long userId = 0;
-            if(rs.next()){
+            if (rs.next()) {
                 userId = rs.getLong(1);
 
             } else {
                 connection.rollback();
             }
 
-            for(Role role : user.getRoles()) {
+            for (Role role : user.getRoles()) {
                 roleStatement = connection.prepareStatement(roleQuery);
                 roleStatement.setLong(1, userId);
                 roleStatement.setString(2, role.getRoleName().toString());
@@ -88,7 +88,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     private User getUserWIthRolesFromResultSet(ResultSet resultSet) throws SQLException {
         User user = getObjectFromResultSet(resultSet);
-        while (!resultSet.isAfterLast() && resultSet.getLong(1) == user.getId()){
+        while (!resultSet.isAfterLast()) {
             Role role = Role.of(resultSet.getString(7));
             user.addRole(role);
             resultSet.next();
@@ -98,7 +98,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     @Override
     public User findByEmail(String email) {
-        String query = QueryBuilder.getSelectByParamQuery(User.class,"EMAIL");
+        String query = QueryBuilder.getSelectByParamQuery(User.class, "EMAIL");
         return simpleConnectAndGetObjectByParam(query, email);
     }
 
